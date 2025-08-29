@@ -1,0 +1,145 @@
+input * {
+    xkb_layout "br"
+    xkb_variant "abnt2"
+}
+
+font JetBrainsMono Nerd Font 10
+
+# Configuração para Sway
+set $mod Mod4
+
+# Autostart para arquivos .desktop via dex (ainda útil no Sway)
+exec dex --autostart --environment sway
+
+# Lock screen com swaylock em vez de i3lock
+exec xss-lock --transfer-sleep-lock -- swaylock -f
+
+# Applet do NetworkManager (funciona no Wayland com suporte GTK)
+exec nm-applet
+
+# Comandos de volume (adaptado para sway/pulseaudio/pipewire)
+
+# Aumentar volume
+bindsym XF86AudioRaiseVolume exec ~/.config/sway/volume.sh up
+
+# Diminuir volume
+bindsym XF86AudioLowerVolume exec ~/.config/sway/volume.sh down
+
+# Mute
+bindsym XF86AudioMute exec ~/.config/sway/volume.sh mute
+
+# Monitores nas posições corretas e com os workspaces iniciais corretos
+output DP-1 pos 0 0
+output HDMI-A-1 pos 1920 0
+workspace 1 output DP-1
+
+# Screenshot
+bindsym Print exec grim
+
+# Mouse + mod move janelas flutuantes
+floating_modifier $mod
+
+# Terminal
+bindsym $mod+Return exec wezterm
+
+# Fechar janela
+bindsym $mod+Shift+q kill
+
+# Menu de aplicativos
+bindsym $mod+d exec wofi --show=drun --prompt="Aplicativos:"  
+
+# Trocar foco
+bindsym $mod+Left focus left
+bindsym $mod+Down focus down
+bindsym $mod+Up focus up
+bindsym $mod+Right focus right
+
+# Mover janelas
+bindsym $mod+Shift+Left move left
+bindsym $mod+Shift+Down move down
+bindsym $mod+Shift+Up move up
+bindsym $mod+Shift+Right move right
+
+# Divisões
+bindsym $mod+h split h
+bindsym $mod+v split v
+
+# Tela cheia
+bindsym $mod+f fullscreen toggle
+
+# Layouts
+bindsym $mod+s layout stacking
+bindsym $mod+w layout tabbed
+bindsym $mod+e layout toggle split
+
+# Alternar flutuante
+bindsym $mod+Shift+space floating toggle
+
+# Alternar entre janelas flutuantes e tiling
+bindsym $mod+space focus mode_toggle
+
+# Foco no contêiner pai
+bindsym $mod+a focus parent
+
+# Workspaces
+set $ws1 "1"
+set $ws2 "2"
+set $ws3 "3"
+set $ws4 "4"
+set $ws5 "5"
+set $ws6 "6"
+set $ws7 "7"
+set $ws8 "8"
+set $ws9 "9"
+set $ws10 "10"
+
+# Trocar de workspace
+bindsym $mod+1 workspace $ws1
+bindsym $mod+2 workspace $ws2
+bindsym $mod+3 workspace $ws3
+bindsym $mod+4 workspace $ws4
+bindsym $mod+5 workspace $ws5
+bindsym $mod+6 workspace $ws6
+bindsym $mod+7 workspace $ws7
+bindsym $mod+8 workspace $ws8
+bindsym $mod+9 workspace $ws9
+bindsym $mod+0 workspace $ws10
+
+# Mover janela para outro workspace
+bindsym $mod+Shift+1 move container to workspace $ws1
+bindsym $mod+Shift+2 move container to workspace $ws2
+bindsym $mod+Shift+3 move container to workspace $ws3
+bindsym $mod+Shift+4 move container to workspace $ws4
+bindsym $mod+Shift+5 move container to workspace $ws5
+bindsym $mod+Shift+6 move container to workspace $ws6
+bindsym $mod+Shift+7 move container to workspace $ws7
+bindsym $mod+Shift+8 move container to workspace $ws8
+bindsym $mod+Shift+9 move container to workspace $ws9
+bindsym $mod+Shift+0 move container to workspace $ws10
+
+# Recarregar o sway
+bindsym $mod+Shift+c reload
+
+# Reiniciar o sway
+bindsym $mod+Shift+r restart
+
+# Sair do sway
+bindsym $mod+Shift+e exec "swaymsg exit"
+
+# Modo de redimensionamento
+mode "resize" {
+    bindsym Left resize shrink width 10px
+    bindsym Down resize grow height 10px
+    bindsym Up resize shrink height 10px
+    bindsym Right resize grow width 10px
+
+    bindsym Return mode "default"
+    bindsym Escape mode "default"
+    bindsym $mod+r mode "default"
+}
+bindsym $mod+r mode "resize"
+
+# Status bar usando waybar
+bar {
+    status_command waybar
+}

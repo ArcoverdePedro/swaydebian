@@ -69,11 +69,12 @@ sudo apt update
 echo "➡️ Instalando pacotes principais..."
 sudo apt install -y \
     sway sway-backgrounds swaybg swayidle swaylock fastfetch \
-    xdg-desktop-portal-wlr xwayland wofi codium waybar \
+    xdg-desktop-portal-wlr xwayland wofi codium waybar xkb-data\
     podman podman-compose obs-studio pipx google-chrome-stable \
     docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin \
     xdg-desktop-portal-wlr v4l2loopback-dkms xdg-desktop-portal xdg-desktop-portal-kde xdg-desktop-portal-gnome qt6-wayland \
-    pipewire pipewire-audio wireplumber pipewire-pulse pavucontrol
+    pipewire pipewire-audio wireplumber pipewire-pulse pavucontrol fonts-jetbrains-mono \
+    network-manager-gnome grim xss-lock dex tree
 
 # -------------------------------------------------------------------
 # 9. PIPX
@@ -84,6 +85,11 @@ pipx install black bandit flake8 uv pyright
 # -------------------------------------------------------------------
 # 10. VSCODIUM-Configuração
 # -------------------------------------------------------------------
+
+# Pré-Configurando o Git
+git config --global user.name "ArcoverdePedro"
+git config --global user.email "pedroarcoverde2@gmail.com"
+
 codium --install-extension redhat.vscode-yaml ms-python.python \
     charliermarsh.ruff tamasfe.even-better-toml wholroyd.jinja \
     mads-hartmann.bash-ide-vscode njpwerner.autodocstring \
@@ -255,7 +261,9 @@ sudo chmod +x /usr/local/bin/atualizar
 # -------------------------------------------------------------------
 # 12. Configuração do Sway
 # -------------------------------------------------------------------
-
+cp -r ./sway ~/.config/sway
+cp -r ./waybar ~/.config/waybar
+cp -r ./wofi ~/.config/wofi
 
 
 echo "✅ Pós-instalação concluída!"
