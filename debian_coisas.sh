@@ -8,7 +8,7 @@ echo "🚀 Iniciando pós-instalação do Debian..."
 # -------------------------------------------------------------------
 sudo apt update
 sudo apt install -y \
-    curl wget git ca-certificates gpg apt-transport-https software-properties-common flatpak
+    curl wget git ca-certificates gpg apt-transport-https flatpak
 
 # -------------------------------------------------------------------
 # 2. Flatpak
@@ -74,7 +74,9 @@ sudo apt install -y \
     docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin \
     xdg-desktop-portal-wlr v4l2loopback-dkms xdg-desktop-portal xdg-desktop-portal-kde xdg-desktop-portal-gnome qt6-wayland \
     pipewire pipewire-audio wireplumber pipewire-pulse pavucontrol fonts-jetbrains-mono \
-    network-manager-gnome grim xss-lock dex tree
+    network-manager-gnome grim xss-lock dex tree thunar thunar-data thunar-archive-plugin \
+    thunar-volman libxfce4ui-utils libnotify-bin thunar-media-tags-plugin 7zip xarchiver \
+    okular xarchiver unzip zip
 
 # -------------------------------------------------------------------
 # 9. PIPX
@@ -83,28 +85,13 @@ pipx ensurepath || true
 pipx install black bandit flake8 uv pyright
 
 # -------------------------------------------------------------------
-# 10. VSCODIUM-Configuração
-# -------------------------------------------------------------------
-
-# Pré-Configurando o Git
-git config --global user.name "ArcoverdePedro"
-git config --global user.email "pedroarcoverde2@gmail.com"
-
-codium --install-extension redhat.vscode-yaml ms-python.python \
-    charliermarsh.ruff tamasfe.even-better-toml wholroyd.jinja \
-    mads-hartmann.bash-ide-vscode njpwerner.autodocstring \
-    docker.docker ms-azuretools.vscode-containers usernamehw.errorlens \
-    ms-python.flake8 batisteo.vscode-django KevinRose.vsc-python-indent
-
-
-# -------------------------------------------------------------------
-# 11. Grupo Docker
+# 10. Grupo Docker
 # -------------------------------------------------------------------
 sudo usermod -aG docker "$USER"
 newgrp docker
 
 # -------------------------------------------------------------------
-# 12. Script atualizar
+# 11. Script atualizar
 # -------------------------------------------------------------------
 echo "➡️ Instalando comando 'atualizar'..."
 sudo tee /usr/local/bin/atualizar >/dev/null <<"EOF"
@@ -261,9 +248,39 @@ sudo chmod +x /usr/local/bin/atualizar
 # -------------------------------------------------------------------
 # 12. Configuração do Sway
 # -------------------------------------------------------------------
+echo "Configurando o Sway"
 cp -r ./sway ~/.config/sway
 cp -r ./waybar ~/.config/waybar
 cp -r ./wofi ~/.config/wofi
 
+# -------------------------------------------------------------------
+# 13. VSCODIUM-Configuração
+# -------------------------------------------------------------------
+
+# Pré-Configurando o Git
+git config --global user.name "ArcoverdePedro"
+git config --global user.email "pedroarcoverde2@gmail.com"
+
+extensions=(
+  redhat.vscode-yaml
+  ms-python.python
+  charliermarsh.ruff
+  tamasfe.even-better-toml
+  wholroyd.jinja
+  mads-hartmann.bash-ide-vscode
+  njpwerner.autodocstring
+  docker.docker
+  ms-azuretools.vscode-containers
+  usernamehw.errorlens
+  ms-python.flake8
+  batisteo.vscode-django
+  KevinRose.vsc-python-indent
+  GitHub.vscode-github-actions
+  GitHub.vscode-pull-request-github
+)
+
+for ext in "${extensions[@]}"; do
+    codium --install-extension "$ext" --force
+done
 
 echo "✅ Pós-instalação concluída!"
