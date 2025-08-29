@@ -52,3 +52,21 @@
 #tray {
   padding: 0 10px;
 }
+
+#custom-poweroff,
+#custom-reboot,
+#custom-logout {
+  padding: 4px 8px;        /* espaço interno */
+  margin: 0 4px;           /* espaço externo (entre botões) */
+  border-radius: 6px;      /* cantos arredondados */
+  background: #2e3440;     /* cor de fundo (pode trocar) */
+  color: #eceff4;          /* cor do ícone */
+  font-size: 14px;         /* tamanho dos ícones */
+}
+
+#custom-poweroff:hover,
+#custom-reboot:hover,
+#custom-logout:hover {
+  background: #4c566a;     /* cor ao passar o mouse */
+  color: #ffffff;          /* deixa o ícone mais visível */
+}

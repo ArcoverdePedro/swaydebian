@@ -1,7 +1,7 @@
 {
   "layer": "top",
   "position": "top",
-  "modules-left": ["sway/workspaces"],
+  "modules-left": ["sway/workspaces", "custom/poweroff", "custom/reboot", "custom/logout"],
   "modules-center": ["clock"],
   "modules-right": ["pulseaudio", "network", "battery", "tray"],
 
@@ -20,6 +20,24 @@
     }
   },
 
+  "custom/poweroff": {
+    "format": "⏻",
+    "tooltip": "Desligar",
+    "on-click": "systemctl poweroff"
+  },
+
+  "custom/reboot": {
+    "format": "",
+    "tooltip": "Reiniciar",
+    "on-click": "systemctl reboot"
+  },
+
+  "custom/logout": {
+    "format": "",
+    "tooltip": "Logout",
+    "on-click": "swaymsg exit"
+  },
+
   "clock": {
     "format": " {:%H:%M}"
   },
@@ -35,16 +53,16 @@
   },
 
   "network": {
-        "format": "{ifname}",
-        "format-wifi": "{essid} ({signalStrength}%) ",
-        "format-ethernet": "{ipaddr}/{cidr} 󰈀",
-        "format-disconnected": "", //An empty format will hide the module.
-        "tooltip-format": "{ifname} via {gwaddr} ",
-        "tooltip-format-wifi": "{essid} ({signalStrength}%) ",
-        "tooltip-format-ethernet": "{ifname} 󰈀",
-        "tooltip-format-disconnected": "Disconnected 󰖪",
-        "max-length": 50
-    },
+    "format": "{ifname}",
+    "format-wifi": "{ipaddr} - {essid} ({signalStrength}%) ",
+    "format-ethernet": "{ipaddr}/{cidr} 󰈀",
+    "format-disconnected": "",
+    "tooltip-format": "{ifname} via {gwaddr} ",
+    "tooltip-format-wifi": "{essid} ({signalStrength}%) ",
+    "tooltip-format-ethernet": "{ifname} 󰈀",
+    "tooltip-format-disconnected": "Disconnected 󰖪",
+    "max-length": 50
+  },
 
   "battery": {
     "format": "{icon}",
