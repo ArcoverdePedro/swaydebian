@@ -61,9 +61,6 @@ Como Usar
     ./debian_coisas.sh
     
 Requisitos
-
-Debian
-
-Usuário com privilégios de sudo.
-
-Conexão com a internet.
+    Debian
+    Usuário com privilégios de sudo.
+    Conexão com a internet.
