@@ -37,17 +37,7 @@ https://download.vscodium.com/debs vscodium main" \
   | sudo tee /etc/apt/sources.list.d/vscodium.list >/dev/null
 
 # -------------------------------------------------------------------
-# 5. WezTerm Repo
-# -------------------------------------------------------------------
-echo "➡️ Adicionando repositório do WezTerm..."
-curl -fsSL https://apt.fury.io/wez/gpg.key \
-  | sudo gpg --yes --dearmor -o /usr/share/keyrings/wezterm-fury.gpg
-
-echo "deb [signed-by=/usr/share/keyrings/wezterm-fury.gpg] https://apt.fury.io/wez/ * *" \
-  | sudo tee /etc/apt/sources.list.d/wezterm.list >/dev/null
-
-# -------------------------------------------------------------------
-# 6. Docker Repo
+# 5. Docker Repo
 # -------------------------------------------------------------------
 echo "➡️ Adicionando repositório do Docker..."
 sudo install -m 0755 -d /etc/apt/keyrings
@@ -59,39 +49,43 @@ https://download.docker.com/linux/debian $(. /etc/os-release && echo "$VERSION_C
   | sudo tee /etc/apt/sources.list.d/docker.list >/dev/null
 
 # -------------------------------------------------------------------
-# 7. Atualização do repositório
+# 6. Atualização do repositório
 # -------------------------------------------------------------------
 sudo apt update
 
 # -------------------------------------------------------------------
-# 8. Instalação de pacotes principais
+# 7. Instalação de pacotes principais
 # -------------------------------------------------------------------
 echo "➡️ Instalando pacotes principais..."
 sudo apt install -y \
     sway sway-backgrounds swaybg swayidle swaylock fastfetch \
-    xdg-desktop-portal-wlr xwayland wofi codium waybar xkb-data\
+    xwayland wofi codium waybar xkb-data alacritty \
     podman podman-compose obs-studio pipx google-chrome-stable \
     docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin \
-    xdg-desktop-portal-wlr v4l2loopback-dkms xdg-desktop-portal xdg-desktop-portal-kde xdg-desktop-portal-gnome qt6-wayland \
+    xdg-desktop-portal-wlr v4l2loopback-dkms xdg-desktop-portal qt6-wayland \
     pipewire pipewire-audio wireplumber pipewire-pulse pavucontrol fonts-jetbrains-mono \
     network-manager-gnome grim xss-lock dex tree thunar thunar-data thunar-archive-plugin \
     thunar-volman libxfce4ui-utils libnotify-bin thunar-media-tags-plugin 7zip xarchiver \
-    okular xarchiver unzip zip
+    okular xarchiver unzip zip clang-tidy gobject-introspection \
+    libdbusmenu-gtk3-dev libevdev-dev libfmt-dev libgirepository1.0-dev libgtk-3-dev \
+    libgtkmm-3.0-dev libinput-dev libjsoncpp-dev libmpdclient-dev libnl-3-dev libnl-genl-3-dev \
+    libpulse-dev libsigc++-2.0-dev libspdlog-dev libwayland-dev scdoc upower libxkbregistry-dev cmake meson scdoc wayland-protocols
+
 
 # -------------------------------------------------------------------
-# 9. PIPX
+# 8. PIPX
 # -------------------------------------------------------------------
 pipx ensurepath || true
 pipx install black bandit flake8 uv pyright
 
 # -------------------------------------------------------------------
-# 10. Grupo Docker
+# 9. Grupo Docker
 # -------------------------------------------------------------------
 sudo usermod -aG docker "$USER"
 newgrp docker
 
 # -------------------------------------------------------------------
-# 11. Script atualizar
+# 10. Script atualizar
 # -------------------------------------------------------------------
 echo "➡️ Instalando comando 'atualizar'..."
 sudo tee /usr/local/bin/atualizar >/dev/null <<"EOF"
@@ -246,15 +240,19 @@ EOF
 sudo chmod +x /usr/local/bin/atualizar
 
 # -------------------------------------------------------------------
-# 12. Configuração do Sway
+# 11. Configuração do Sway e Habilitando serviços do usuario
 # -------------------------------------------------------------------
 echo "Configurando o Sway"
 cp -r ./sway ~/.config/sway
 cp -r ./waybar ~/.config/waybar
 cp -r ./wofi ~/.config/wofi
 
+echo "Configurando o xdg-desktop"
+systemctl --user enable xdg-desktop-portal
+systemctl --user enable xdg-desktop-portal-wlr
+
 # -------------------------------------------------------------------
-# 13. VSCODIUM-Configuração
+# 12. VSCODIUM-Configuração
 # -------------------------------------------------------------------
 
 # Pré-Configurando o Git
@@ -277,6 +275,8 @@ extensions=(
   KevinRose.vsc-python-indent
   GitHub.vscode-github-actions
   GitHub.vscode-pull-request-github
+  yy0931.vscode-sqlite3-editor
+  jdinhlife.gruvbox
 )
 
 for ext in "${extensions[@]}"; do
