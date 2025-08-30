@@ -79,13 +79,18 @@ pipx ensurepath || true
 pipx install ruff bandit flake8 uv pyright
 
 # -------------------------------------------------------------------
-# 9. Grupo Docker
+# 9. Bun (JS)
+# -------------------------------------------------------------------
+curl -fsSL https://bun.sh/install | bash
+
+# -------------------------------------------------------------------
+# 10. Grupo Docker
 # -------------------------------------------------------------------
 sudo usermod -aG docker "$USER"
 newgrp docker
 
 # -------------------------------------------------------------------
-# 10. Script atualizar
+# 11. Script atualizar
 # -------------------------------------------------------------------
 echo "➡️ Instalando comando 'atualizar'..."
 sudo tee /usr/local/bin/atualizar >/dev/null <<"EOF"
@@ -240,7 +245,7 @@ EOF
 sudo chmod +x /usr/local/bin/atualizar
 
 # -------------------------------------------------------------------
-# 11. Configuração do Sway e Habilitando serviços do usuario
+# 12. Configuração do Sway e Habilitando serviços do usuario
 # -------------------------------------------------------------------
 echo "Configurando o Sway"
 cp -r ./sway ~/.config/sway
@@ -252,7 +257,7 @@ systemctl --user enable xdg-desktop-portal
 systemctl --user enable xdg-desktop-portal-wlr
 
 # -------------------------------------------------------------------
-# 12. VSCODIUM-Configuração
+# 13. VSCODIUM-Configuração
 # -------------------------------------------------------------------
 
 # Pré-Configurando o Git
