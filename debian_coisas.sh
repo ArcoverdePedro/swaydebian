@@ -59,7 +59,7 @@ sudo apt update
 echo "➡️ Instalando pacotes principais..."
 sudo apt install -y \
     sway sway-backgrounds swaybg swayidle swaylock fastfetch \
-    xwayland wofi codium waybar xkb-data alacritty \
+    xwayland wofi codium waybar xkb-data alacritty btop \
     podman podman-compose obs-studio pipx google-chrome-stable \
     docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin \
     xdg-desktop-portal-wlr v4l2loopback-dkms xdg-desktop-portal qt6-wayland \
