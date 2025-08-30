@@ -31,17 +31,15 @@ Funcionalidades Principais
 
     Multimídia: PipeWire, OBS Studio, controle de áudio
 
-    Desenvolvimento:
+    VSCodium com extensões para Python, Docker, YAML, TOML
 
-        VSCodium com extensões para Python, Docker, YAML, TOML
+    Ferramentas Python (pipx, black, flake8, pyright, uv)
 
-        Ferramentas Python (pipx, black, flake8, pyright, uv)
+    Docker CE e Docker Compose
 
-        Docker CE e Docker Compose
+    Aplicativos Flatpak: Ungoogled Chromium, Bruno (API client)
 
-        Aplicativos Flatpak: Ungoogled Chromium, Bruno (API client)
-
-        Utilitários: Thunar, Okular, btop, tree
+    Utilitários: Thunar, Okular, btop, tree
 
 Comando Personalizado
 
