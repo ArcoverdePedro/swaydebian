@@ -59,14 +59,14 @@ sudo apt update
 echo "➡️ Instalando pacotes principais..."
 sudo apt install -y \
     sway sway-backgrounds swaybg swayidle swaylock fastfetch \
-    xwayland wofi codium waybar xkb-data alacritty btop \
-    podman podman-compose obs-studio pipx google-chrome-stable \
+    xwayland wofi codium waybar xkb-data alacritty btop vlc \
+    podman podman-compose obs-studio obs-plugins pipx google-chrome-stable \
     docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin \
     xdg-desktop-portal-wlr v4l2loopback-dkms xdg-desktop-portal qt6-wayland \
     pipewire pipewire-audio wireplumber pipewire-pulse pavucontrol fonts-jetbrains-mono \
     network-manager-gnome grim xss-lock dex tree thunar thunar-data thunar-archive-plugin \
     thunar-volman libxfce4ui-utils libnotify-bin thunar-media-tags-plugin 7zip xarchiver \
-    okular xarchiver unzip zip clang-tidy gobject-introspection \
+    okular xarchiver unzip zip clang-tidy gobject-introspection libreoffice \
     libdbusmenu-gtk3-dev libevdev-dev libfmt-dev libgirepository1.0-dev libgtk-3-dev \
     libgtkmm-3.0-dev libinput-dev libjsoncpp-dev libmpdclient-dev libnl-3-dev libnl-genl-3-dev \
     libpulse-dev libsigc++-2.0-dev libspdlog-dev libwayland-dev scdoc upower libxkbregistry-dev cmake meson scdoc wayland-protocols
@@ -76,7 +76,7 @@ sudo apt install -y \
 # 8. PIPX
 # -------------------------------------------------------------------
 pipx ensurepath || true
-pipx install black bandit flake8 uv pyright
+pipx install ruff bandit flake8 uv pyright
 
 # -------------------------------------------------------------------
 # 9. Grupo Docker
@@ -277,6 +277,8 @@ extensions=(
   GitHub.vscode-pull-request-github
   yy0931.vscode-sqlite3-editor
   jdinhlife.gruvbox
+  ms-kubernetes-tools.vscode-kubernetes-tools
+  ultram4rine.vscode-choosealicense
 )
 
 for ext in "${extensions[@]}"; do

@@ -1,12 +1,14 @@
-Pós-Instalação Debian
-
-Este repositório contém um script de pós-instalação para Debian, configurando ambiente de desenvolvimento, Wayland, ferramentas essenciais e aplicativos via Flatpak, VSCodium e Google Chrome. Ele também adiciona repositórios de terceiros e configura o ambiente do usuário.
-
-Tecnologias usadas:
 ![Debian Badge](https://img.shields.io/badge/Debian-A81D33?logo=debian&logoColor=fff&style=for-the-badge)
 ![GNU Bash Badge](https://img.shields.io/badge/GNU%20Bash-4EAA25?logo=gnubash&logoColor=fff&style=for-the-badge)
 ![Sway Badge](https://img.shields.io/badge/Sway-68751C?logo=sway&logoColor=fff&style=for-the-badge)
 ![CSS Badge](https://img.shields.io/badge/CSS-639?logo=css&logoColor=fff&style=for-the-badge)
+![Python Badge](https://img.shields.io/badge/Python-3776AB?logo=python&logoColor=fff&style=for-the-badge)
+
+Pós-Instalação Debian
+
+Este repositório contém um script de pós-instalação para Debian, configurando ambiente de desenvolvimento, Wayland, ferramentas essenciais e aplicativos via Flatpak, VSCodium e Google Chrome. Ele também adiciona repositórios de terceiros e configura o ambiente do usuário.
+
+
 
 Estrutura Pensada
 
