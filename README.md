@@ -1,15 +1,14 @@
-#Pós-Instalação Debian
+Pós-Instalação Debian
 
-##Este repositório contém um script de pós-instalação para Debian, configurando ambiente de desenvolvimento, Wayland, ferramentas essenciais e aplicativos via Flatpak, VSCodium e Google Chrome. Ele também adiciona repositórios de terceiros e configura o ambiente do usuário.
+Este repositório contém um script de pós-instalação para Debian, configurando ambiente de desenvolvimento, Wayland, ferramentas essenciais e aplicativos via Flatpak, VSCodium e Google Chrome. Ele também adiciona repositórios de terceiros e configura o ambiente do usuário.
 
-##Tecnologias usadas:
+Tecnologias usadas:
+![Debian Badge](https://img.shields.io/badge/Debian-A81D33?logo=debian&logoColor=fff&style=for-the-badge)
+![GNU Bash Badge](https://img.shields.io/badge/GNU%20Bash-4EAA25?logo=gnubash&logoColor=fff&style=for-the-badge)
+![Sway Badge](https://img.shields.io/badge/Sway-68751C?logo=sway&logoColor=fff&style=for-the-badge)
+![CSS Badge](https://img.shields.io/badge/CSS-639?logo=css&logoColor=fff&style=for-the-badge)
 
-    ![Debian Badge](https://img.shields.io/badge/Debian-A81D33?logo=debian&logoColor=fff&style=for-the-badge)
-    ![GNU Bash Badge](https://img.shields.io/badge/GNU%20Bash-4EAA25?logo=gnubash&logoColor=fff&style=for-the-badge)
-    ![Sway Badge](https://img.shields.io/badge/Sway-68751C?logo=sway&logoColor=fff&style=for-the-badge)
-    ![CSS Badge](https://img.shields.io/badge/CSS-639?logo=css&logoColor=fff&style=for-the-badge)
-
-##Estrutura Pensada
+Estrutura Pensada
 
     ├── debian_coisas.sh       # Script principal de pós-instalação
     ├── sway                  # Configurações do Sway
@@ -22,7 +21,7 @@
         ├── config
         └── style.css
 
-##Funcionalidades Principais
+Funcionalidades Principais
 
     Instalação de Pacotes Essenciais: curl, wget, git, ferramentas de sistema
 
@@ -32,7 +31,7 @@
 
     Multimídia: PipeWire, OBS Studio, controle de áudio
 
-    ###Desenvolvimento:
+    Desenvolvimento:
 
         VSCodium com extensões para Python, Docker, YAML, TOML
 
@@ -44,11 +43,11 @@
 
         Utilitários: Thunar, Okular, btop, tree
 
-##Comando Personalizado
+Comando Personalizado
 
     atualizar: Atualiza sistema, pacotes Flatpak e realiza limpeza
 
-##Configurações Automáticas
+Configurações Automáticas
 
     Configurações do Sway, Waybar e Wofi
 
@@ -58,12 +57,12 @@
 
     Configuração inicial do Git
 
-##Como Usar
+Como Usar
 
     chmod +x debian_coisas.sh
     ./debian_coisas.sh
     
-##Requisitos
+Requisitos
 
 Debian
 
