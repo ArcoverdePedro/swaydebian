@@ -6,7 +6,8 @@
 
 Pós-Instalação Debian
 
-Este repositório contém um script de pós-instalação para Debian, configurando ambiente de desenvolvimento, Wayland, ferramentas essenciais e aplicativos via Flatpak, VSCodium e Google Chrome. Ele também adiciona repositórios de terceiros e configura o ambiente do usuário.
+Este repositório contém um script de pós-instalação para Debian, configurando ambiente de desenvolvimento, Wayland, ferramentas essenciais e aplicativos via Flatpak, VSCodium e Google Chrome.
+Ele também adiciona repositórios de terceiros e configura o ambiente do usuário.
 
 
 
@@ -27,17 +28,15 @@ Funcionalidades Principais
 
     Instalação de Pacotes Essenciais: curl, wget, git, ferramentas de sistema
 
-    Repositórios Adicionais: VSCodium, Docker, Google Chrome
-
     Ambiente Wayland/Sway: Instalação completa do compositor Sway WM com waybar, wofi e alacritty
 
     Multimídia: PipeWire, OBS Studio, controle de áudio
 
     VSCodium com extensões para Python, Docker, YAML, TOML
 
-    Ferramentas Python (pipx, black, flake8, pyright, uv)
+    Ferramentas Python (pipx, ruff, flake8, pyright, uv)
 
-    Docker CE e Docker Compose
+    Docker CE, Docker Compose, Podman e Podman Compose
 
     Aplicativos Flatpak: Ungoogled Chromium, Bruno (API client)
 
