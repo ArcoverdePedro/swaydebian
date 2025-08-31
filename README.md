@@ -13,16 +13,16 @@ Ele também adiciona repositórios de terceiros e configura o ambiente do usuár
 
 Estrutura Pensada
 
-    ├── debian_coisas.sh       # Script principal de pós-instalação
-    ├── sway                  # Configurações do Sway
-    │   ├── config
-    │   └── volume.sh
-    ├── waybar                # Configurações do Waybar
-    │   ├── config
-    │   └── style.css
-    └── wofi                  # Configurações do Wofi
-        ├── config
-        └── style.css
+    ├── debian_coisas.sh # Script principal de pós-instalação
+    ├── sway             # Configurações para o Sway ~/.config/sway
+    │   ├── config       # Configurações
+    │   └── volume.sh    # Script para controle de volume
+    ├── waybar           # Configurações para o Waybar ~/.config/waybar
+    │   ├── config       # Configurações
+    │   └── style.css    # Estilização
+    └── wofi             # Configurações do Wofi ~/.config/wofi
+        ├── config       # Configurações
+        └── style.css    # Estilização
 
 Funcionalidades Principais
 
@@ -35,6 +35,8 @@ Funcionalidades Principais
     VSCodium com extensões para Python, Docker, YAML, TOML
 
     Ferramentas Python (pipx, ruff, flake8, pyright, uv)
+
+    Ferramanta Bun para JavaScript
 
     Docker CE, Docker Compose, Podman e Podman Compose
 

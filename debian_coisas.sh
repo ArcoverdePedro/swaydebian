@@ -25,7 +25,14 @@ wget -q -O - https://dl.google.com/linux/linux_signing_key.pub | sudo gpg --dear
 echo "deb [arch=amd64 signed-by=/usr/share/keyrings/google-chrome.gpg] http://dl.google.com/linux/chrome/deb/ stable main" | sudo tee /etc/apt/sources.list.d/google-chrome.list
 
 # -------------------------------------------------------------------
-# 4. VSCodium Repo
+# 4. Wezterm Repo
+# -------------------------------------------------------------------
+curl -fsSL https://apt.fury.io/wez/gpg.key | sudo gpg --yes --dearmor -o /usr/share/keyrings/wezterm-fury.gpg
+echo 'deb [signed-by=/usr/share/keyrings/wezterm-fury.gpg] https://apt.fury.io/wez/ * *' | sudo tee /etc/apt/sources.list.d/wezterm.list
+sudo chmod 644 /usr/share/keyrings/wezterm-fury.gpg
+
+# -------------------------------------------------------------------
+# 5. VSCodium Repo
 # -------------------------------------------------------------------
 echo "➡️ Adicionando repositório do VSCodium..."
 curl -sSL https://gitlab.com/paulcarroty/vscodium-deb-rpm-repo/raw/master/pub.gpg \
@@ -37,7 +44,7 @@ https://download.vscodium.com/debs vscodium main" \
   | sudo tee /etc/apt/sources.list.d/vscodium.list >/dev/null
 
 # -------------------------------------------------------------------
-# 5. Docker Repo
+# 6. Docker Repo
 # -------------------------------------------------------------------
 echo "➡️ Adicionando repositório do Docker..."
 sudo install -m 0755 -d /etc/apt/keyrings
@@ -49,48 +56,47 @@ https://download.docker.com/linux/debian $(. /etc/os-release && echo "$VERSION_C
   | sudo tee /etc/apt/sources.list.d/docker.list >/dev/null
 
 # -------------------------------------------------------------------
-# 6. Atualização do repositório
+# 7. Atualização do repositório
 # -------------------------------------------------------------------
 sudo apt update
 
 # -------------------------------------------------------------------
-# 7. Instalação de pacotes principais
+# 8. Instalação de pacotes principais
 # -------------------------------------------------------------------
 echo "➡️ Instalando pacotes principais..."
 sudo apt install -y \
-    sway sway-backgrounds swaybg swayidle swaylock fastfetch \
-    xwayland wofi codium waybar xkb-data alacritty btop vlc \
-    podman podman-compose obs-studio obs-plugins pipx google-chrome-stable \
-    docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin \
-    xdg-desktop-portal-wlr v4l2loopback-dkms xdg-desktop-portal qt6-wayland \
-    pipewire pipewire-audio wireplumber pipewire-pulse pavucontrol fonts-jetbrains-mono \
-    network-manager-gnome grim xss-lock dex tree thunar thunar-data thunar-archive-plugin \
-    thunar-volman libxfce4ui-utils libnotify-bin thunar-media-tags-plugin 7zip xarchiver \
-    okular xarchiver unzip zip clang-tidy gobject-introspection libreoffice \
-    libdbusmenu-gtk3-dev libevdev-dev libfmt-dev libgirepository1.0-dev libgtk-3-dev \
-    libgtkmm-3.0-dev libinput-dev libjsoncpp-dev libmpdclient-dev libnl-3-dev libnl-genl-3-dev \
-    libpulse-dev libsigc++-2.0-dev libspdlog-dev libwayland-dev scdoc upower libxkbregistry-dev cmake meson scdoc wayland-protocols
+    sway swaybg swayidle swaylock waybar wofi wezterm \
+    xwayland xdg-desktop-portal xdg-desktop-portal-wlr qt6-wayland \
+    pipewire pipewire-audio wireplumber pipewire-pulse pavucontrol \
+    network-manager-gnome brightnessctl slurp grim \
+    thunar thunar-archive-plugin thunar-volman thunar-media-tags-plugin \
+    libnotify-bin fonts-jetbrains-mono \
+    vlc okular libreoffice fastfetch btop tree unzip zip 7zip \
+    podman podman-compose docker-ce docker-ce-cli containerd.io \
+    docker-buildx-plugin docker-compose-plugin \
+    obs-studio obs-plugins v4l2loopback-dkms \
+    google-chrome-stable codium
 
 
 # -------------------------------------------------------------------
-# 8. PIPX
+# 9. PIPX
 # -------------------------------------------------------------------
 pipx ensurepath || true
 pipx install ruff bandit flake8 uv pyright
 
 # -------------------------------------------------------------------
-# 9. Bun (JS)
+# 10. Bun (JS)
 # -------------------------------------------------------------------
 curl -fsSL https://bun.sh/install | bash
 
 # -------------------------------------------------------------------
-# 10. Grupo Docker
+# 11. Grupo Docker
 # -------------------------------------------------------------------
 sudo usermod -aG docker "$USER"
 newgrp docker
 
 # -------------------------------------------------------------------
-# 11. Script atualizar
+# 12. Script atualizar
 # -------------------------------------------------------------------
 echo "➡️ Instalando comando 'atualizar'..."
 sudo tee /usr/local/bin/atualizar >/dev/null <<"EOF"
@@ -245,19 +251,15 @@ EOF
 sudo chmod +x /usr/local/bin/atualizar
 
 # -------------------------------------------------------------------
-# 12. Configuração do Sway e Habilitando serviços do usuario
+# 13. Configuração do Sway e Habilitando serviços do usuario
 # -------------------------------------------------------------------
 echo "Configurando o Sway"
 cp -r ./sway ~/.config/sway
 cp -r ./waybar ~/.config/waybar
 cp -r ./wofi ~/.config/wofi
 
-echo "Configurando o xdg-desktop"
-systemctl --user enable xdg-desktop-portal
-systemctl --user enable xdg-desktop-portal-wlr
-
 # -------------------------------------------------------------------
-# 13. VSCODIUM-Configuração
+# 14. VSCODIUM-Configuração
 # -------------------------------------------------------------------
 
 # Pré-Configurando o Git
