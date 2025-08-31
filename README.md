@@ -64,7 +64,5 @@ Como Usar:
 Requisitos
 
     Debian
-
     Sudo User
-    
     Internet
