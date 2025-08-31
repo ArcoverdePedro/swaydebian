@@ -70,7 +70,7 @@ sudo apt install -y \
     pipewire pipewire-audio wireplumber pipewire-pulse pavucontrol \
     network-manager-gnome brightnessctl slurp grim \
     thunar thunar-archive-plugin thunar-volman thunar-media-tags-plugin \
-    libnotify-bin fonts-jetbrains-mono \
+    libnotify-bin fonts-jetbrains-mono nsxiv \
     vlc okular libreoffice fastfetch btop tree unzip zip 7zip \
     podman podman-compose docker-ce docker-ce-cli containerd.io \
     docker-buildx-plugin docker-compose-plugin \
