@@ -61,7 +61,9 @@ Como Usar:
     chmod +x debian_coisas.sh
     ./debian_coisas.sh
     
-Requisitos: 
-    Debian,
-    Usuário com privilégios de sudo,
-    Conexão com a internet.
+Requisitos
+    Debian
+
+    Sudo User
+    
+    Internet
