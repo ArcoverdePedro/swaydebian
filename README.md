@@ -62,6 +62,7 @@ Como Usar:
     ./debian_coisas.sh
     
 Requisitos
+
     Debian
 
     Sudo User
