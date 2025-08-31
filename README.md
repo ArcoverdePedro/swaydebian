@@ -15,14 +15,14 @@ Estrutura Pensada
 
     ├── debian_coisas.sh # Script principal de pós-instalação
     ├── sway             # Configurações para o Sway ~/.config/sway
-    │   ├── config       # Configurações
+    │   ├── config       
     │   └── volume.sh    # Script para controle de volume
     ├── waybar           # Configurações para o Waybar ~/.config/waybar
-    │   ├── config       # Configurações
-    │   └── style.css    # Estilização
+    │   ├── config       
+    │   └── style.css    
     └── wofi             # Configurações do Wofi ~/.config/wofi
-        ├── config       # Configurações
-        └── style.css    # Estilização
+        ├── config       
+        └── style.css    
 
 Funcionalidades Principais
 
