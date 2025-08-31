@@ -44,10 +44,6 @@ Funcionalidades Principais
 
     Utilitários: Thunar, Okular, btop, tree
 
-Comando Personalizado
-
-    atualizar: Atualiza sistema, pacotes Flatpak e realiza limpeza
-
 Configurações Automáticas
 
     Configurações do Sway, Waybar e Wofi
@@ -58,7 +54,9 @@ Configurações Automáticas
 
     Configuração inicial do Git
 
-Como Usar
+    Comando Personalizado - atualizar: Atualiza sistema, pacotes Flatpak e realiza limpeza
+
+Como Usar:
 
     chmod +x debian_coisas.sh
     ./debian_coisas.sh
