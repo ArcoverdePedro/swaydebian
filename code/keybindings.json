@@ -1,0 +1,45 @@
+[
+    {
+        "key": "ctrl+down",
+        "command": "cursorMove",
+        "args": {
+            "to": "nextBlankLine",
+            "by": "wrappedLine",
+            "value": 1
+        },
+        "when": "editorTextFocus"
+    },
+
+    {
+        "key": "ctrl+up",
+        "command": "cursorMove",
+        "args": {
+            "to": "prevBlankLine",
+            "by": "wrappedLine",
+            "value": 1
+        },
+        "when": "editorTextFocus"
+    },
+
+    {
+        "key": "ctrl+shift+up",
+        "command": "cursorMove",
+        "args": {
+            "to": "prevBlankLine",
+            "by": "wrappedLine",
+            "select": true
+        },
+        "when": "editorTextFocus"
+    },
+    
+    {
+        "key": "ctrl+shift+down",
+        "command": "cursorMove",
+        "args": {
+            "to": "nextBlankLine",
+            "by": "wrappedLine",
+            "select": true
+        },
+        "when": "editorTextFocus"
+    }
+]

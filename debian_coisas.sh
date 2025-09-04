@@ -1,18 +1,42 @@
 #!/bin/bash
 set -euo pipefail
 
+# Obtém o diretório do script para referenciar arquivos
+SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )"
+
 echo "🚀 Iniciando pós-instalação do Debian..."
+
+read -rp "Deseja usar o SearXNG? (S/N): " resposta
+resposta=$(echo "$resposta" | tr '[:lower:]' '[:upper:]')
+
+USUARIO=$(id -u -n)
+
+case "$resposta" in
+    S) echo "Será instalado o SearXNG"
+        ;;
+
+    N) echo "Não Será instalado o SearXNG"
+        ;;
+
+    *)
+        echo "Opção inválida. Saindo do script."
+        sleep 2
+        exit 1 # Sai do script com código de erro
+        ;;
+esac
 
 # -------------------------------------------------------------------
 # 1. Pacotes básicos
 # -------------------------------------------------------------------
+
 sudo apt update
 sudo apt install -y \
-    curl wget git ca-certificates gpg apt-transport-https flatpak
+    curl wget git ca-certificates gpg apt-transport-https flatpak coreutils
 
 # -------------------------------------------------------------------
 # 2. Flatpak
 # -------------------------------------------------------------------
+
 flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
 flatpak install -y --noninteractive flathub io.github.ungoogled_software.ungoogled_chromium com.usebruno.Bruno || true
 
@@ -20,13 +44,15 @@ flatpak install -y --noninteractive flathub io.github.ungoogled_software.ungoogl
 # -------------------------------------------------------------------
 # 3. Google Chrome
 # -------------------------------------------------------------------
-echo "➡️ Instalando Google Chrome..."
+
+echo "Instalando Google Chrome..."
 wget -q -O - https://dl.google.com/linux/linux_signing_key.pub | sudo gpg --dearmor -o /usr/share/keyrings/google-chrome.gpg
 echo "deb [arch=amd64 signed-by=/usr/share/keyrings/google-chrome.gpg] http://dl.google.com/linux/chrome/deb/ stable main" | sudo tee /etc/apt/sources.list.d/google-chrome.list
 
 # -------------------------------------------------------------------
 # 4. Wezterm Repo
 # -------------------------------------------------------------------
+
 curl -fsSL https://apt.fury.io/wez/gpg.key | sudo gpg --yes --dearmor -o /usr/share/keyrings/wezterm-fury.gpg
 echo 'deb [signed-by=/usr/share/keyrings/wezterm-fury.gpg] https://apt.fury.io/wez/ * *' | sudo tee /etc/apt/sources.list.d/wezterm.list
 sudo chmod 644 /usr/share/keyrings/wezterm-fury.gpg
@@ -34,7 +60,8 @@ sudo chmod 644 /usr/share/keyrings/wezterm-fury.gpg
 # -------------------------------------------------------------------
 # 5. VSCodium Repo
 # -------------------------------------------------------------------
-echo "➡️ Adicionando repositório do VSCodium..."
+
+echo "Adicionando repositório do VSCodium..."
 curl -sSL https://gitlab.com/paulcarroty/vscodium-deb-rpm-repo/raw/master/pub.gpg \
   | gpg --dearmor \
   | sudo tee /usr/share/keyrings/vscodium-archive-keyring.gpg >/dev/null
@@ -46,7 +73,8 @@ https://download.vscodium.com/debs vscodium main" \
 # -------------------------------------------------------------------
 # 6. Docker Repo
 # -------------------------------------------------------------------
-echo "➡️ Adicionando repositório do Docker..."
+
+echo "Adicionando repositório do Docker..."
 sudo install -m 0755 -d /etc/apt/keyrings
 sudo curl -fsSL https://download.docker.com/linux/debian/gpg -o /etc/apt/keyrings/docker.asc
 sudo chmod a+r /etc/apt/keyrings/docker.asc
@@ -58,12 +86,14 @@ https://download.docker.com/linux/debian $(. /etc/os-release && echo "$VERSION_C
 # -------------------------------------------------------------------
 # 7. Atualização do repositório
 # -------------------------------------------------------------------
+
 sudo apt update
 
 # -------------------------------------------------------------------
 # 8. Instalação de pacotes principais
 # -------------------------------------------------------------------
-echo "➡️ Instalando pacotes principais..."
+
+echo "Instalando pacotes principais..."
 sudo apt install -y \
     sway swaybg swayidle swaylock waybar wofi wezterm \
     xwayland xdg-desktop-portal xdg-desktop-portal-wlr qt6-wayland \
@@ -75,30 +105,35 @@ sudo apt install -y \
     podman podman-compose docker-ce docker-ce-cli containerd.io \
     docker-buildx-plugin docker-compose-plugin \
     obs-studio obs-plugins v4l2loopback-dkms \
-    google-chrome-stable codium
+    google-chrome-stable codium firefox
 
 
 # -------------------------------------------------------------------
 # 9. PIPX
 # -------------------------------------------------------------------
+
 pipx ensurepath || true
 pipx install ruff bandit flake8 uv pyright
 
 # -------------------------------------------------------------------
 # 10. Bun (JS)
 # -------------------------------------------------------------------
+
 curl -fsSL https://bun.sh/install | bash
 
 # -------------------------------------------------------------------
 # 11. Grupo Docker
 # -------------------------------------------------------------------
-sudo usermod -aG docker "$USER"
+
+sudo usermod -aG docker "$USUARIO"
 newgrp docker
 
 # -------------------------------------------------------------------
 # 12. Script atualizar
 # -------------------------------------------------------------------
-echo "➡️ Instalando comando 'atualizar'..."
+
+echo "Instalando comando 'atualizar'..."
+
 sudo tee /usr/local/bin/atualizar >/dev/null <<"EOF"
 #!/bin/bash
 
@@ -254,17 +289,39 @@ sudo chmod +x /usr/local/bin/atualizar
 # 13. Configuração do Sway e Habilitando serviços do usuario
 # -------------------------------------------------------------------
 echo "Configurando o Sway"
-cp -r ./sway ~/.config/sway
-cp -r ./waybar ~/.config/waybar
-cp -r ./wofi ~/.config/wofi
+cp -r "${SCRIPT_DIR}/sway" "$HOME/.config/sway"
+cp -r "${SCRIPT_DIR}/waybar" "$HOME/.config/waybar"
+cp -r "${SCRIPT_DIR}/wofi" "$HOME/.config/wofi"
 
 # -------------------------------------------------------------------
-# 14. VSCODIUM-Configuração
+# 14. Searxng
+# -------------------------------------------------------------------
+
+
+case "$resposta" in
+    S)
+        echo "Clonando Repositório do Searxng e Subindo o Container"
+
+        git clone https://github.com/ArcoverdePedro/SearXNG.git "/home/$USUARIO/SearXNG"
+
+        sudo bash "/home/$USUARIO/SearXNG/init.sh"
+        ;;
+
+    N)
+        echo "Você escolheu 'Não'. Pulando a Instalação do SearXNG."
+        ;;
+esac
+
+# -------------------------------------------------------------------
+# 15. VSCODIUM-Configuração
 # -------------------------------------------------------------------
 
 # Pré-Configurando o Git
 git config --global user.name "ArcoverdePedro"
 git config --global user.email "pedroarcoverde2@gmail.com"
+
+echo "configurando keybindings"
+cp "${SCRIPT_DIR}/code/keybindings.json" "$HOME/.config/Code/User/"
 
 extensions=(
   redhat.vscode-yaml
