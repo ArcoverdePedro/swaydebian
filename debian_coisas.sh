@@ -354,7 +354,7 @@ done
 echo "Atualizando e Reiniciando o PC"
 
 sudo apt update
-sudo apt upgrade
+sudo apt upgrade -y
 
 echo "✅ Pós-instalação concluída!"
 echo ""
