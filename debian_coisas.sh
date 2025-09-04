@@ -301,11 +301,7 @@ cp -r "${SCRIPT_DIR}/sway" "$HOME/.config/sway"
 cp -r "${SCRIPT_DIR}/waybar" "$HOME/.config/waybar"
 cp -r "${SCRIPT_DIR}/wofi" "$HOME/.config/wofi"
 
-wget -q -O ~/Downloads/wallpaper.jpg https://4kwallpapers.com/images/wallpapers/hunter-x-hunter-5120x2880-10303.jpg
-
-sleep 1
-
-swaybg -i "$HOME/Downloads/wallpaper.jpg"
+swaybg -i "${SCRIPT_DIR}/wallpaper/wallpaper.png"
 
 systemctl --user import-environment DISPLAY WAYLAND_DISPLAY XDG_CURRENT_DESKTOP
 
