@@ -297,7 +297,6 @@ cp -r "${SCRIPT_DIR}/wofi" "$HOME/.config/wofi"
 # 14. Searxng
 # -------------------------------------------------------------------
 
-
 case "$resposta" in
     S)
         echo "Clonando Repositório do Searxng e Subindo o Container"
