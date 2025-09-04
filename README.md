@@ -13,15 +13,19 @@ Ele também adiciona repositórios de terceiros e configura o ambiente do usuár
 
 Estrutura Pensada
 
-    ├── debian_coisas.sh # Script principal de pós-instalação
-    ├── sway             # Configurações para o Sway ~/.config/sway
-    │   ├── config       
-    │   └── volume.sh    # Script para controle de volume
-    ├── waybar           # Configurações para o Waybar ~/.config/waybar
-    │   ├── config       
-    │   └── style.css    
-    └── wofi             # Configurações do Wofi ~/.config/wofi
-        ├── config       
+    ├── code
+    |   └──keybindings.json -> keybindings para o VSCodium
+    ├── debian_coisas.sh -> Script Principal
+    ├── sway
+    │   ├── config
+    │   └── volume.sh -> Script para controlar o volume
+    ├── waybar
+    │   ├── config
+    │   └── style.css
+    ├── wezterm
+    │   └── wezterm.lua -> apenas para estilizar o terminal (Gruvbox Style)
+    └── wofi
+        ├── config
         └── style.css    
 
 Funcionalidades Principais
