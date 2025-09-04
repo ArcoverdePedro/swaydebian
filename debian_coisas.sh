@@ -107,7 +107,7 @@ sudo apt install -y \
     podman podman-compose docker-ce docker-ce-cli containerd.io \
     docker-buildx-plugin docker-compose-plugin \
     obs-studio obs-plugins v4l2loopback-dkms \
-    google-chrome-stable codium firefox
+    google-chrome-stable codium firefox ncdu
 
 
 # -------------------------------------------------------------------
@@ -291,9 +291,21 @@ sudo chmod +x /usr/local/bin/atualizar
 # 13. Configuração do Sway e Habilitando serviços do usuario
 # -------------------------------------------------------------------
 echo "Configurando o Sway"
+
+mkdir -p "$HOME/.config/VSCodium/User"
+mkdir -p "$HOME/.config/sway"
+mkdir -p "$HOME/.config/waybar"
+mkdir -p "$HOME/.config/wofi"
+
 cp -r "${SCRIPT_DIR}/sway" "$HOME/.config/sway"
 cp -r "${SCRIPT_DIR}/waybar" "$HOME/.config/waybar"
 cp -r "${SCRIPT_DIR}/wofi" "$HOME/.config/wofi"
+
+wget -q -O ~/Downloads/wallpaper.jpg https://4kwallpapers.com/images/wallpapers/hunter-x-hunter-5120x2880-10303.jpg
+
+sleep 1
+
+swaybg -i "$HOME/Downloads/wallpaper.jpg"
 
 systemctl --user import-environment DISPLAY WAYLAND_DISPLAY XDG_CURRENT_DESKTOP
 
