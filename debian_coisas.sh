@@ -348,4 +348,13 @@ for ext in "${extensions[@]}"; do
     codium --install-extension "$ext" --force
 done
 
+# -------------------------------------------------------------------
+# 16. Fim do Script, reiniciando a maquina e  
+# -------------------------------------------------------------------
+echo "Atualizando e Reiniciando o PC"
+sudo apt update
+sudo apt upgrade
 echo "✅ Pós-instalação concluída!"
+echo ""
+echo "Reiniciando a Maquina"
+sudo shutdown -r now
