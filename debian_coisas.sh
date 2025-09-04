@@ -293,6 +293,16 @@ cp -r "${SCRIPT_DIR}/sway" "$HOME/.config/sway"
 cp -r "${SCRIPT_DIR}/waybar" "$HOME/.config/waybar"
 cp -r "${SCRIPT_DIR}/wofi" "$HOME/.config/wofi"
 
+systemctl --user import-environment DISPLAY WAYLAND_DISPLAY XDG_CURRENT_DESKTOP
+
+mkdir -p ~/.config/environment.d
+
+sudo tee ~/.config/environment.d/envvars.conf >/dev/null <<"EOF"
+WAYLAND_DISPLAY=wayland-0
+XDG_CURRENT_DESKTOP=sway
+
+EOF
+
 # -------------------------------------------------------------------
 # 14. Searxng
 # -------------------------------------------------------------------
@@ -320,7 +330,7 @@ git config --global user.name "ArcoverdePedro"
 git config --global user.email "pedroarcoverde2@gmail.com"
 
 echo "configurando keybindings"
-cp "${SCRIPT_DIR}/code/keybindings.json" "$HOME/.config/Code/User/"
+cp "${SCRIPT_DIR}/code/keybindings.json" "$HOME/.config/VSCodium/User/keybindings.json"
 
 extensions=(
   redhat.vscode-yaml

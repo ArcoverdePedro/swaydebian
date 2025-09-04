@@ -41,5 +41,17 @@
             "select": true
         },
         "when": "editorTextFocus"
-    }
+    },
+
+    {
+    "key": "ctrl+w",
+    "command": "cursorHome",
+    "when": "editorTextFocus"
+  },
+  
+  {
+    "key": "ctrl+e",
+    "command": "cursorEnd",
+    "when": "editorTextFocus"
+  }
 ]
