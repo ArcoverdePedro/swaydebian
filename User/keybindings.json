@@ -32,7 +32,6 @@
         "when": "editorTextFocus"
     },
 
-
     {
         "key": "ctrl+shift+down",
         "command": "cursorMove",
@@ -53,6 +52,18 @@
     {
     "key": "ctrl+.",
     "command": "cursorEnd",
+    "when": "editorTextFocus"
+    },
+    
+    {
+    "key": "ctrl+shift+,",
+    "command": "cursorHomeSelect",
+    "when": "editorTextFocus"
+    },
+
+    {
+    "key": "ctrl+shift+.",
+    "command": "cursorEndSelect",
     "when": "editorTextFocus"
     }
 ]
