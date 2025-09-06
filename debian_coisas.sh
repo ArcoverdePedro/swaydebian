@@ -99,7 +99,7 @@ echo "Instalando pacotes principais..."
 sudo apt install -y \
     sway swaybg swayidle swaylock waybar wofi wezterm \
     xwayland xdg-desktop-portal-wlr \
-    pipewire pipewire-audio wireplumber pipewire-pulse pavucontrol \
+    pipewire pipewire-audio pulseaudio-utils wireplumber pipewire-pulse pavucontrol \
     network-manager brightnessctl slurp grim \
     pcmanfm fonts-font-awesome mupdf lightdm \
     libnotify-bin fonts-jetbrains-mono nsxiv \
@@ -111,7 +111,7 @@ sudo apt install -y \
     xdg-utils pipx gnome-boxes \
     dbus dbus-user-session \
     fonts-dejavu fonts-noto fonts-noto-color-emoji \
-    git curl wget
+    git curl wget qbittorrent
 
 # -------------------------------------------------------------------
 # Configuracao do Sway e Habilitando servicos do usuario
@@ -122,16 +122,21 @@ mkdir -p "$HOME/.config/VSCodium/User"
 mkdir -p "$HOME/.config/sway"
 mkdir -p "$HOME/.config/waybar"
 mkdir -p "$HOME/.config/wofi"
+mkdir -p "$HOME/.config/gtk-3.0"
 
 sudo cp -r "${SCRIPT_DIR}/sway" "$HOME/.config/"
 sudo cp -r "${SCRIPT_DIR}/waybar" "$HOME/.config/"
 sudo cp -r "${SCRIPT_DIR}/wofi" "$HOME/.config/"
+sudo cp -r "${SCRIPT_DIR}/gtk-3.0" "$HOME/.config/"
 
 # Adição do Grupo do Docker
 sudo usermod -aG docker "$USUARIO"
 
 # Define o firefox como browser padrão
 xdg-settings set default-web-browser firefox.desktop
+
+# Define o Pcmanfm como File manager padrão
+xdg-mime default pcmanfm.desktop inode/directory
 
 # -------------------------------------------------------------------
 # Script atualizar

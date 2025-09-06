@@ -36,6 +36,9 @@ output DP-1 pos 0 0
 output HDMI-A-1 pos 1920 0
 workspace 1 output DP-1
 
+# Janelas
+client.focused #b8bb26 #282828 #d79921 #b8bb26
+
 # Screenshot
 bindsym Print exec grim
 
@@ -50,6 +53,9 @@ bindsym $mod+Shift+q kill
 
 # Menu de aplicativos
 bindsym $mod+d exec wofi --show=drun --prompt="Aplicativos:"  
+
+# File Manager
+bindsym $mod+Shift+f exec pcmanfm
 
 # Trocar foco
 bindsym $mod+Left focus left
@@ -143,6 +149,9 @@ mode "resize" {
 bindsym $mod+r mode "resize"
 
 # Status bar usando waybar
+# ~/.config/sway/config
+# Configuração da barra de status
+
 bar {
-    status_command waybar
+    swaybar_command waybar
 }
