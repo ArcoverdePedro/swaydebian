@@ -45,6 +45,9 @@ bindsym Print exec grim
 # Mouse + mod move janelas flutuantes
 floating_modifier $mod
 
+# Wallpaper
+exec_always swaybg -i ~/wallpaper.png -m fill
+
 # Terminal
 bindsym $mod+Return exec wezterm
 

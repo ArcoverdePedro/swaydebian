@@ -128,6 +128,7 @@ sudo cp -r "${SCRIPT_DIR}/sway" "$HOME/.config/"
 sudo cp -r "${SCRIPT_DIR}/waybar" "$HOME/.config/"
 sudo cp -r "${SCRIPT_DIR}/wofi" "$HOME/.config/"
 sudo cp -r "${SCRIPT_DIR}/gtk-3.0" "$HOME/.config/"
+sudo cp "${SCRIPT_DIR}/wallpaper/wallpaper.png" "$HOME/wallpaper.png"
 
 # Adição do Grupo do Docker
 sudo usermod -aG docker "$USUARIO"
