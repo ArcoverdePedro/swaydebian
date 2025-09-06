@@ -13,7 +13,7 @@ Ele também adiciona repositórios de terceiros e configura o ambiente do usuár
 
 Estrutura Pensada
 
-    ├── code
+    ├── User
     |   └──keybindings.json -> keybindings para o VSCodium
     ├── debian_coisas.sh -> Script Principal
     ├── sway

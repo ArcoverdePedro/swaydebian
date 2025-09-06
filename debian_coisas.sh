@@ -114,6 +114,20 @@ sudo apt install -y \
     git curl wget
 
 # -------------------------------------------------------------------
+# Configuracao do Sway e Habilitando servicos do usuario
+# -------------------------------------------------------------------
+echo "Configurando o Sway"
+
+mkdir -p "$HOME/.config/VSCodium/User"
+mkdir -p "$HOME/.config/sway"
+mkdir -p "$HOME/.config/waybar"
+mkdir -p "$HOME/.config/wofi"
+
+sudo cp -r "${SCRIPT_DIR}/sway" "$HOME/.config/"
+sudo cp -r "${SCRIPT_DIR}/waybar" "$HOME/.config/"
+sudo cp -r "${SCRIPT_DIR}/wofi" "$HOME/.config/"
+
+# -------------------------------------------------------------------
 # Script atualizar
 # -------------------------------------------------------------------
 
@@ -271,24 +285,6 @@ EOF
 sudo chmod +x /usr/local/bin/atualizar
 
 # -------------------------------------------------------------------
-# Configuracao do Sway e Habilitando servicos do usuario
-# -------------------------------------------------------------------
-echo "Configurando o Sway"
-
-mkdir -p "$HOME/.config/VSCodium/User"
-mkdir -p "$HOME/.config/sway"
-mkdir -p "$HOME/.config/waybar"
-mkdir -p "$HOME/.config/wofi"
-
-cp -r "${SCRIPT_DIR}/sway" "$HOME/.config/sway"
-cp -r "${SCRIPT_DIR}/waybar" "$HOME/.config/waybar"
-cp -r "${SCRIPT_DIR}/wofi" "$HOME/.config/wofi"
-
-systemctl --user enable dbus
-systemctl --user enable pipewire pipewire-pulse wireplumber
-systemctl --user enable xdg-desktop-portal xdg-desktop-portal-wlr
-
-# -------------------------------------------------------------------
 # PIPX
 # -------------------------------------------------------------------
 
@@ -339,7 +335,7 @@ git config --global user.name "ArcoverdePedro"
 git config --global user.email "pedroarcoverde2@gmail.com"
 
 echo "configurando keybindings"
-cp "${SCRIPT_DIR}/code/keybindings.json" "$HOME/.config/VSCodium/User/keybindings.json"
+sudo cp "${SCRIPT_DIR}/User/keybindings.json" "$HOME/.config/VSCodium/User/keybindings.json"
 
 extensions=(
   redhat.vscode-yaml
@@ -378,6 +374,10 @@ sudo apt upgrade -y
 echo "Pos-instalacao concluida!"
 echo ""
 echo "Reiniciando a Maquina"
+
+systemctl --user enable dbus
+systemctl --user enable pipewire pipewire-pulse wireplumber
+systemctl --user enable xdg-desktop-portal xdg-desktop-portal-wlr
 
 sleep 2
 sudo shutdown -r now
