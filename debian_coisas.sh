@@ -38,7 +38,7 @@ sudo apt install -y \
 # -------------------------------------------------------------------
 
 flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
-flatpak install -y --noninteractive flathub io.github.ungoogled_software.ungoogled_chromium com.usebruno.Bruno org.gnome.Boxes || true
+flatpak install -y --noninteractive flathub io.github.ungoogled_software.ungoogled_chromium com.usebruno.Bruno || true
 
 
 # -------------------------------------------------------------------
@@ -108,7 +108,7 @@ sudo apt install -y \
     docker-buildx-plugin docker-compose-plugin \
     obs-studio obs-plugins v4l2loopback-dkms \
     google-chrome-stable codium firefox-esr ncdu \
-    xdg-utils pipx \
+    xdg-utils pipx gnome-boxes \
     dbus dbus-user-session \
     fonts-dejavu fonts-noto fonts-noto-color-emoji \
     git curl wget
