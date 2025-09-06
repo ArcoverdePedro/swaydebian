@@ -32,6 +32,7 @@
         "when": "editorTextFocus"
     },
 
+
     {
         "key": "ctrl+shift+down",
         "command": "cursorMove",
