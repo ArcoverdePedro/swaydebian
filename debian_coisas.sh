@@ -98,7 +98,7 @@ sudo apt update
 echo "Instalando pacotes principais..."
 sudo apt install -y \
     sway swaybg swayidle swaylock waybar wofi wezterm \
-    xwayland xdg-desktop-portal xdg-desktop-portal-wlr \
+    xwayland xdg-desktop-portal-wlr \
     pipewire pipewire-audio wireplumber pipewire-pulse pavucontrol \
     network-manager brightnessctl slurp grim \
     pcmanfm fonts-font-awesome mupdf lightdm \
@@ -127,6 +127,8 @@ sudo cp -r "${SCRIPT_DIR}/sway" "$HOME/.config/"
 sudo cp -r "${SCRIPT_DIR}/waybar" "$HOME/.config/"
 sudo cp -r "${SCRIPT_DIR}/wofi" "$HOME/.config/"
 
+# Adição do Grupo do Docker
+sudo usermod -aG docker "$USUARIO"
 # -------------------------------------------------------------------
 # Script atualizar
 # -------------------------------------------------------------------
@@ -285,30 +287,6 @@ EOF
 sudo chmod +x /usr/local/bin/atualizar
 
 # -------------------------------------------------------------------
-# PIPX
-# -------------------------------------------------------------------
-
-export PATH="$HOME/.local/bin:$PATH"
-if command -v pipx >/dev/null; then
-    pipx ensurepath || true
-    pipx install ruff
-    pipx install bandit
-    pipx install flake8
-    pipx install uv
-    pipx install pyright
-else
-    echo "pipx não encontrado no PATH mesmo após instalação. Verifique o shell."
-fi
-
-
-# -------------------------------------------------------------------
-# Grupo Docker
-# -------------------------------------------------------------------
-
-sudo usermod -aG docker "$USUARIO"
-newgrp docker
-
-# -------------------------------------------------------------------
 # Searxng
 # -------------------------------------------------------------------
 
@@ -363,6 +341,22 @@ extensions=(
 for ext in "${extensions[@]}"; do
     codium --install-extension "$ext" --force
 done
+
+# -------------------------------------------------------------------
+# PIPX
+# -------------------------------------------------------------------
+
+export PATH="$HOME/.local/bin:$PATH"
+if command -v pipx >/dev/null; then
+    pipx ensurepath || true
+    pipx install ruff
+    pipx install bandit
+    pipx install flake8
+    pipx install uv
+    pipx install pyright
+else
+    echo "pipx não encontrado no PATH mesmo após instalação. Verifique o shell."
+fi
 
 # -------------------------------------------------------------------
 # Fim do Script, reiniciando a maquina e  
