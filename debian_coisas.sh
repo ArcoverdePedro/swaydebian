@@ -98,12 +98,12 @@ sudo apt update
 echo "Instalando pacotes principais..."
 sudo apt install -y \
     sway swaybg swayidle swaylock waybar wofi wezterm \
-    xwayland xdg-desktop-portal xdg-desktop-portal-wlr qt6-wayland \
+    xwayland xdg-desktop-portal xdg-desktop-portal-wlr \
     pipewire pipewire-audio wireplumber pipewire-pulse pavucontrol \
     network-manager brightnessctl slurp grim \
-    pcmanfm fonts-font-awesome\
+    pcmanfm fonts-font-awesome mupdf \
     libnotify-bin fonts-jetbrains-mono nsxiv \
-    vlc okular libreoffice fastfetch btop tree unzip zip 7zip \
+    vlc libreoffice fastfetch btop tree unzip zip 7zip \
     podman podman-compose docker-ce docker-ce-cli containerd.io \
     docker-buildx-plugin docker-compose-plugin \
     obs-studio obs-plugins v4l2loopback-dkms \
