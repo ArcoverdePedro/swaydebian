@@ -107,7 +107,11 @@ sudo apt install -y \
     podman podman-compose docker-ce docker-ce-cli containerd.io \
     docker-buildx-plugin docker-compose-plugin \
     obs-studio obs-plugins v4l2loopback-dkms \
-    google-chrome-stable codium firefox ncdu
+    google-chrome-stable codium firefox ncdu \
+    xdg-utils \
+    dbus dbus-user-session \
+    fonts-dejavu fonts-noto fonts-noto-color-emoji \
+    git curl wget
 
 
 # -------------------------------------------------------------------
@@ -301,17 +305,9 @@ cp -r "${SCRIPT_DIR}/sway" "$HOME/.config/sway"
 cp -r "${SCRIPT_DIR}/waybar" "$HOME/.config/waybar"
 cp -r "${SCRIPT_DIR}/wofi" "$HOME/.config/wofi"
 
-swaybg -i "${SCRIPT_DIR}/wallpaper/wallpaper.png"
-
-systemctl --user import-environment DISPLAY WAYLAND_DISPLAY XDG_CURRENT_DESKTOP
-
-mkdir -p ~/.config/environment.d
-
-tee ~/.config/environment.d/envvars.conf >/dev/null <<"EOF"
-WAYLAND_DISPLAY=wayland-0
-XDG_CURRENT_DESKTOP=sway
-
-EOF
+systemctl --user enable dbus
+systemctl --user enable pipewire pipewire-pulse wireplumber
+systemctl --user enable xdg-desktop-portal xdg-desktop-portal-wlr
 
 # -------------------------------------------------------------------
 # 14. Searxng
