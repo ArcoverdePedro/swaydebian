@@ -12,27 +12,34 @@ Ele também adiciona repositórios de terceiros e configura o ambiente do usuár
 
 
 Estrutura Pensada
-
-    ├── User
-    |   └──keybindings.json -> keybindings para o VSCodium
+  
     ├── debian_coisas.sh -> Script Principal
+    ├── gtk-3.0
+    │   └── settings.ini -> estilização do pcmanfm
+    ├── LICENSE
+    ├── README.md
     ├── sway
-    │   ├── config
-    │   └── volume.sh -> Script para controlar o volume
+    │   ├── config
+    │   └── volume.sh -> Script para controlar o volume
+    ├── User
+    │   ├── keybindings.json -> keybindings para o VSCodium
+    │   └── settings.json -> Configurações do VSCodium
+    ├── wallpaper
+    │   └── wallpaper.png
     ├── waybar
-    │   ├── config
-    │   └── style.css
+    │   ├── config
+    │   └── style.css
     ├── wezterm
-    │   └── wezterm.lua -> apenas para estilizar o terminal (Gruvbox Style)
+    │   └── wezterm.lua -> apenas para estilizar o terminal (Gruvbox Style)
     └── wofi
         ├── config
-        └── style.css    
+        └── style.css
 
 Funcionalidades Principais
 
     Instalação de Pacotes Essenciais: curl, wget, git, ferramentas de sistema
 
-    Ambiente Wayland/Sway: Instalação completa do compositor Sway WM com waybar, wofi e alacritty
+    Ambiente Wayland/Sway: Instalação completa do compositor Sway WM com waybar, wofi e Wezterm
 
     Multimídia: PipeWire, OBS Studio, controle de áudio
 
@@ -40,13 +47,11 @@ Funcionalidades Principais
 
     Ferramentas Python (pipx, ruff, flake8, pyright, uv)
 
-    Ferramanta Bun para JavaScript
-
     Docker CE, Docker Compose, Podman e Podman Compose
 
     Aplicativos Flatpak: Ungoogled Chromium, Bruno (API client)
 
-    Utilitários: Thunar, Okular, btop, tree
+    Utilitários: pcmanfm, mupdf, btop, tree, nsxiv
 
 Configurações Automáticas
 
