@@ -101,7 +101,7 @@ sudo apt install -y \
     xwayland xdg-desktop-portal xdg-desktop-portal-wlr \
     pipewire pipewire-audio wireplumber pipewire-pulse pavucontrol \
     network-manager brightnessctl slurp grim \
-    pcmanfm fonts-font-awesome mupdf \
+    pcmanfm fonts-font-awesome mupdf lightdm \
     libnotify-bin fonts-jetbrains-mono nsxiv \
     vlc libreoffice fastfetch btop tree unzip zip 7zip \
     podman podman-compose docker-ce docker-ce-cli containerd.io \
