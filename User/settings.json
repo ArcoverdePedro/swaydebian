@@ -1,0 +1,9 @@
+{
+    "workbench.colorTheme": "Gruvbox Dark Medium",
+    "git.enableSmartCommit": true,
+    "git.autofetch": true,
+    "git.confirmSync": false,
+    "security.allowedPermissions": {
+    "sudo": true
+}
+}
