@@ -338,6 +338,9 @@ echo "configurando keybindings"
 sudo cp "${SCRIPT_DIR}/User/keybindings.json" "$HOME/.config/VSCodium/User/keybindings.json"
 
 extensions=(
+  ultram4rine.vscode-choosealicense
+  jdinhlife.gruvbox
+  usernamehw.errorlens
   redhat.vscode-yaml
   ms-python.python
   charliermarsh.ruff
@@ -347,16 +350,14 @@ extensions=(
   njpwerner.autodocstring
   docker.docker
   ms-azuretools.vscode-containers
-  usernamehw.errorlens
   ms-python.flake8
   batisteo.vscode-django
   KevinRose.vsc-python-indent
   GitHub.vscode-github-actions
   GitHub.vscode-pull-request-github
   yy0931.vscode-sqlite3-editor
-  jdinhlife.gruvbox
   ms-kubernetes-tools.vscode-kubernetes-tools
-  ultram4rine.vscode-choosealicense
+ 
 )
 
 for ext in "${extensions[@]}"; do
