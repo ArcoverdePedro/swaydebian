@@ -118,12 +118,18 @@ sudo apt install -y \
 # 9. PIPX
 # -------------------------------------------------------------------
 
-pipx ensurepath || true
-pipx install ruff
-pipx install bandit
-pipx install flake8
-pipx install uv
-pipx install pyright
+export PATH="$HOME/.local/bin:$PATH"
+if command -v pipx >/dev/null; then
+    pipx ensurepath || true
+    pipx install ruff
+    pipx install bandit
+    pipx install flake8
+    pipx install uv
+    pipx install pyright
+else
+    echo "pipx não encontrado no PATH mesmo após instalação. Verifique o shell."
+fi
+
 
 # -------------------------------------------------------------------
 # 11. Grupo Docker
