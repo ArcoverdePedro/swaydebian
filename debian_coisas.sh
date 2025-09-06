@@ -26,7 +26,7 @@ case "$resposta" in
 esac
 
 # -------------------------------------------------------------------
-# 1. Pacotes basicos
+# Pacotes basicos
 # -------------------------------------------------------------------
 
 sudo apt update
@@ -34,7 +34,7 @@ sudo apt install -y \
     curl wget git ca-certificates gpg apt-transport-https flatpak coreutils
 
 # -------------------------------------------------------------------
-# 2. Flatpak
+# Flatpak
 # -------------------------------------------------------------------
 
 flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
@@ -42,7 +42,7 @@ flatpak install -y --noninteractive flathub io.github.ungoogled_software.ungoogl
 
 
 # -------------------------------------------------------------------
-# 3. Google Chrome
+# Google Chrome
 # -------------------------------------------------------------------
 
 echo "Instalando Google Chrome..."
@@ -50,7 +50,7 @@ wget -q -O - https://dl.google.com/linux/linux_signing_key.pub | sudo gpg --dear
 echo "deb [arch=amd64 signed-by=/usr/share/keyrings/google-chrome.gpg] http://dl.google.com/linux/chrome/deb/ stable main" | sudo tee /etc/apt/sources.list.d/google-chrome.list
 
 # -------------------------------------------------------------------
-# 4. Wezterm Repo
+# Wezterm Repo
 # -------------------------------------------------------------------
 
 curl -fsSL https://apt.fury.io/wez/gpg.key | sudo gpg --yes --dearmor -o /usr/share/keyrings/wezterm-fury.gpg
@@ -60,7 +60,7 @@ sudo chmod 644 /usr/share/keyrings/wezterm-fury.gpg
 cp -r "${SCRIPT_DIR}/wezterm/wezterm.lua" "$HOME/.wezterm.lua"
 
 # -------------------------------------------------------------------
-# 5. VSCodium Repo
+# VSCodium Repo
 # -------------------------------------------------------------------
 
 echo "Adicionando repositorio do VSCodium..."
@@ -73,7 +73,7 @@ https://download.vscodium.com/debs vscodium main" \
   | sudo tee /etc/apt/sources.list.d/vscodium.list >/dev/null
 
 # -------------------------------------------------------------------
-# 6. Docker Repo
+# Docker Repo
 # -------------------------------------------------------------------
 
 echo "Adicionando repositorio do Docker..."
@@ -86,13 +86,13 @@ https://download.docker.com/linux/debian $(. /etc/os-release && echo "$VERSION_C
   | sudo tee /etc/apt/sources.list.d/docker.list >/dev/null
 
 # -------------------------------------------------------------------
-# 7. Atualizacao do repositorio
+# Atualizacao do repositorio
 # -------------------------------------------------------------------
 
 sudo apt update
 
 # -------------------------------------------------------------------
-# 8. Instalacao de pacotes principais
+# Instalacao de pacotes principais
 # -------------------------------------------------------------------
 
 echo "Instalando pacotes principais..."
@@ -113,33 +113,8 @@ sudo apt install -y \
     fonts-dejavu fonts-noto fonts-noto-color-emoji \
     git curl wget
 
-
 # -------------------------------------------------------------------
-# 9. PIPX
-# -------------------------------------------------------------------
-
-export PATH="$HOME/.local/bin:$PATH"
-if command -v pipx >/dev/null; then
-    pipx ensurepath || true
-    pipx install ruff
-    pipx install bandit
-    pipx install flake8
-    pipx install uv
-    pipx install pyright
-else
-    echo "pipx não encontrado no PATH mesmo após instalação. Verifique o shell."
-fi
-
-
-# -------------------------------------------------------------------
-# 11. Grupo Docker
-# -------------------------------------------------------------------
-
-sudo usermod -aG docker "$USUARIO"
-newgrp docker
-
-# -------------------------------------------------------------------
-# 12. Script atualizar
+# Script atualizar
 # -------------------------------------------------------------------
 
 echo "Instalando comando 'atualizar'..."
@@ -296,7 +271,7 @@ EOF
 sudo chmod +x /usr/local/bin/atualizar
 
 # -------------------------------------------------------------------
-# 13. Configuracao do Sway e Habilitando servicos do usuario
+# Configuracao do Sway e Habilitando servicos do usuario
 # -------------------------------------------------------------------
 echo "Configurando o Sway"
 
@@ -314,7 +289,31 @@ systemctl --user enable pipewire pipewire-pulse wireplumber
 systemctl --user enable xdg-desktop-portal xdg-desktop-portal-wlr
 
 # -------------------------------------------------------------------
-# 14. Searxng
+# PIPX
+# -------------------------------------------------------------------
+
+export PATH="$HOME/.local/bin:$PATH"
+if command -v pipx >/dev/null; then
+    pipx ensurepath || true
+    pipx install ruff
+    pipx install bandit
+    pipx install flake8
+    pipx install uv
+    pipx install pyright
+else
+    echo "pipx não encontrado no PATH mesmo após instalação. Verifique o shell."
+fi
+
+
+# -------------------------------------------------------------------
+# Grupo Docker
+# -------------------------------------------------------------------
+
+sudo usermod -aG docker "$USUARIO"
+newgrp docker
+
+# -------------------------------------------------------------------
+# Searxng
 # -------------------------------------------------------------------
 
 case "$resposta" in
@@ -332,7 +331,7 @@ case "$resposta" in
 esac
 
 # -------------------------------------------------------------------
-# 15. VSCODIUM-Configuracao
+# VSCODIUM-Configuracao
 # -------------------------------------------------------------------
 
 # Pre-Configurando o Git
@@ -369,7 +368,7 @@ for ext in "${extensions[@]}"; do
 done
 
 # -------------------------------------------------------------------
-# 16. Fim do Script, reiniciando a maquina e  
+# Fim do Script, reiniciando a maquina e  
 # -------------------------------------------------------------------
 echo "Atualizando e Reiniciando o PC"
 
