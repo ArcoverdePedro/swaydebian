@@ -1,10 +1,10 @@
 #!/bin/bash
 set -euo pipefail
 
-# Obtém o diretório do script para referenciar arquivos
+# Obtem o diretorio do script para referenciar arquivos
 SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )"
 
-echo "🚀 Iniciando pós-instalação do Debian..."
+echo "Iniciando pos-instalacao do Debian..."
 
 read -rp "Deseja usar o SearXNG? (S/N): " resposta
 resposta=$(echo "$resposta" | tr '[:lower:]' '[:upper:]')
@@ -12,21 +12,21 @@ resposta=$(echo "$resposta" | tr '[:lower:]' '[:upper:]')
 USUARIO=$(id -u -n)
 
 case "$resposta" in
-    S) echo "Será instalado o SearXNG"
+    S) echo "Sera instalado o SearXNG"
         ;;
 
-    N) echo "Não Será instalado o SearXNG"
+    N) echo "Nao Sera instalado o SearXNG"
         ;;
 
     *)
-        echo "Opção inválida. Saindo do script."
+        echo "Opcao invalida. Saindo do script."
         sleep 2
-        exit 1 # Sai do script com código de erro
+        exit 1 # Sai do script com codigo de erro
         ;;
 esac
 
 # -------------------------------------------------------------------
-# 1. Pacotes básicos
+# 1. Pacotes basicos
 # -------------------------------------------------------------------
 
 sudo apt update
@@ -63,7 +63,7 @@ cp -r "${SCRIPT_DIR}/wezterm/wezterm.lua" "$HOME/.wezterm.lua"
 # 5. VSCodium Repo
 # -------------------------------------------------------------------
 
-echo "Adicionando repositório do VSCodium..."
+echo "Adicionando repositorio do VSCodium..."
 curl -sSL https://gitlab.com/paulcarroty/vscodium-deb-rpm-repo/raw/master/pub.gpg \
   | gpg --dearmor \
   | sudo tee /usr/share/keyrings/vscodium-archive-keyring.gpg >/dev/null
@@ -76,7 +76,7 @@ https://download.vscodium.com/debs vscodium main" \
 # 6. Docker Repo
 # -------------------------------------------------------------------
 
-echo "Adicionando repositório do Docker..."
+echo "Adicionando repositorio do Docker..."
 sudo install -m 0755 -d /etc/apt/keyrings
 sudo curl -fsSL https://download.docker.com/linux/debian/gpg -o /etc/apt/keyrings/docker.asc
 sudo chmod a+r /etc/apt/keyrings/docker.asc
@@ -86,13 +86,13 @@ https://download.docker.com/linux/debian $(. /etc/os-release && echo "$VERSION_C
   | sudo tee /etc/apt/sources.list.d/docker.list >/dev/null
 
 # -------------------------------------------------------------------
-# 7. Atualização do repositório
+# 7. Atualizacao do repositorio
 # -------------------------------------------------------------------
 
 sudo apt update
 
 # -------------------------------------------------------------------
-# 8. Instalação de pacotes principais
+# 8. Instalacao de pacotes principais
 # -------------------------------------------------------------------
 
 echo "Instalando pacotes principais..."
@@ -100,15 +100,15 @@ sudo apt install -y \
     sway swaybg swayidle swaylock waybar wofi wezterm \
     xwayland xdg-desktop-portal xdg-desktop-portal-wlr qt6-wayland \
     pipewire pipewire-audio wireplumber pipewire-pulse pavucontrol \
-    network-manager-gnome brightnessctl slurp grim \
-    thunar thunar-archive-plugin thunar-volman thunar-media-tags-plugin \
+    network-manager brightnessctl slurp grim \
+    pcmanfm fonts-font-awesome\
     libnotify-bin fonts-jetbrains-mono nsxiv \
     vlc okular libreoffice fastfetch btop tree unzip zip 7zip \
     podman podman-compose docker-ce docker-ce-cli containerd.io \
     docker-buildx-plugin docker-compose-plugin \
     obs-studio obs-plugins v4l2loopback-dkms \
-    google-chrome-stable codium firefox ncdu \
-    xdg-utils \
+    google-chrome-stable codium firefox-esr ncdu \
+    xdg-utils pipx \
     dbus dbus-user-session \
     fonts-dejavu fonts-noto fonts-noto-color-emoji \
     git curl wget
@@ -119,13 +119,11 @@ sudo apt install -y \
 # -------------------------------------------------------------------
 
 pipx ensurepath || true
-pipx install ruff bandit flake8 uv pyright
-
-# -------------------------------------------------------------------
-# 10. Bun (JS)
-# -------------------------------------------------------------------
-
-curl -fsSL https://bun.sh/install | bash
+pipx install ruff
+pipx install bandit
+pipx install flake8
+pipx install uv
+pipx install pyright
 
 # -------------------------------------------------------------------
 # 11. Grupo Docker
@@ -143,7 +141,7 @@ echo "Instalando comando 'atualizar'..."
 sudo tee /usr/local/bin/atualizar >/dev/null <<"EOF"
 #!/bin/bash
 
-# Comando 'atualizar' - Atualização automática do Debian/Ubuntu
+# Comando 'atualizar' - Atualizacao automatica do Debian/Ubuntu
 # Coloque este arquivo em: /usr/local/bin/atualizar
 # chmod +x /usr/local/bin/atualizar
 
@@ -165,32 +163,32 @@ command_exists() { command -v "$1" >/dev/null 2>&1; }
 
 show_progress() {
     echo
-    echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
+    echo "---------------------------------------------------"
     log_info "$1"
-    echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
+    echo "---------------------------------------------------"
 }
 
 update_apt() {
     show_progress "Atualizando sistema via APT"
     
     if ! command_exists apt-get; then
-        log_error "APT não encontrado!"
+        log_error "APT nao encontrado!"
         return 1
     fi
 
     log_info "Atualizando lista de pacotes..."
     sudo apt-get update -qq
     
-    log_info "Verificando atualizações disponíveis..."
+    log_info "Verificando atualizacoes disponiveis..."
     local updates=$(apt list --upgradable 2>/dev/null | grep -c 'upgradable from' || echo "0")
     
     if [ "$updates" -gt 0 ]; then
-        log_info "Encontradas $updates atualizações - iniciando..."
+        log_info "Encontradas $updates atualizacoes - iniciando..."
         sudo apt-get upgrade -y
         sudo apt-get dist-upgrade -y
         log_success "Sistema APT atualizado!"
     else
-        log_success "Sistema APT já está atualizado!"
+        log_success "Sistema APT ja esta atualizado!"
     fi
 }
 
@@ -198,7 +196,7 @@ update_flatpak() {
     show_progress "Atualizando Flatpaks"
     
     if ! command_exists flatpak; then
-        log_warning "Flatpak não instalado - pulando..."
+        log_warning "Flatpak nao instalado - pulando..."
         return 0
     fi
     
@@ -209,7 +207,7 @@ update_flatpak() {
         return 0
     fi
     
-    log_info "Atualizando $apps aplicações Flatpak..."
+    log_info "Atualizando $apps aplicacoes Flatpak..."
     sudo flatpak update -y --system >/dev/null 2>&1 || true
     flatpak update -y --user >/dev/null 2>&1 || true
     log_success "Flatpaks atualizados!"
@@ -218,7 +216,7 @@ update_flatpak() {
 cleanup_system() {
     show_progress "Limpeza do sistema"
     
-    log_info "Removendo pacotes desnecessários..."
+    log_info "Removendo pacotes desnecessarios..."
     sudo apt-get autoremove -y >/dev/null 2>&1
     
     log_info "Limpando cache do APT..."
@@ -226,52 +224,52 @@ cleanup_system() {
     sudo apt-get clean -y >/dev/null 2>&1
     
     if command_exists flatpak; then
-        log_info "Removendo Flatpaks não utilizados..."
+        log_info "Removendo Flatpaks nao utilizados..."
         flatpak uninstall --unused -y >/dev/null 2>&1 || true
     fi
     
-    log_success "Limpeza concluída!"
+    log_success "Limpeza concluida!"
 }
 
 show_summary() {
     echo
-    echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
-    log_success "ATUALIZAÇÃO CONCLUÍDA"
-    echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
+    echo "---------------------------------------------------"
+    log_success "ATUALIZACAO CONCLUIDA"
+    echo "---------------------------------------------------"
     
     log_info "Sistema: $(grep PRETTY_NAME /etc/os-release | cut -d'"' -f2)"
     log_info "Data/Hora: $(date '+%d/%m/%Y %H:%M:%S')"
     
     if [ -f /var/run/reboot-required ]; then
-        log_warning "Reinicialização recomendada!"
+        log_warning "Reinicializacao recomendada!"
         echo -e "Execute: ${YELLOW}sudo reboot${NC}"
     else
-        log_success "Nenhuma reinicialização necessária"
+        log_success "Nenhuma reinicializacao necessaria"
     fi
     
     echo
-    log_success "Sistema Debian/Ubuntu atualizado com sucesso! ✓"
+    log_success "Sistema Debian/Ubuntu atualizado com sucesso!"
 }
 
 main() {
     local start_time=$(date +%s)
     
-    echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
-    log_info "🚀 ATUALIZANDO DEBIAN/UBUNTU"
+    echo "---------------------------------------------------"
+    log_info "ATUALIZANDO DEBIAN/UBUNTU"
     log_info "Iniciado em: $(date '+%d/%m/%Y %H:%M:%S')"
-    echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
+    echo "---------------------------------------------------"
     
     if [ "$EUID" -eq 0 ]; then
-        log_error "Não execute como root! Use como usuário normal."
+        log_error "Nao execute como root! Use como usuario normal."
         exit 1
     fi
     
     log_info "Verificando conectividade..."
     if ! ping -c 1 8.8.8.8 &>/dev/null; then
-        log_error "Sem conexão com internet!"
+        log_error "Sem conexao com internet!"
         exit 1
     fi
-    log_success "Conexão OK"
+    log_success "Conexao OK"
     
     update_apt
     update_flatpak
@@ -284,7 +282,7 @@ main() {
     log_info "Tempo total: ${duration}s"
 }
 
-trap 'log_error "Interrompido pelo usuário"; exit 130' INT TERM
+trap 'log_error "Interrompido pelo usuario"; exit 130' INT TERM
 
 main "$@"
 EOF
@@ -292,7 +290,7 @@ EOF
 sudo chmod +x /usr/local/bin/atualizar
 
 # -------------------------------------------------------------------
-# 13. Configuração do Sway e Habilitando serviços do usuario
+# 13. Configuracao do Sway e Habilitando servicos do usuario
 # -------------------------------------------------------------------
 echo "Configurando o Sway"
 
@@ -315,7 +313,7 @@ systemctl --user enable xdg-desktop-portal xdg-desktop-portal-wlr
 
 case "$resposta" in
     S)
-        echo "Clonando Repositório do Searxng e Subindo o Container"
+        echo "Clonando Repositorio do Searxng e Subindo o Container"
 
         git clone https://github.com/ArcoverdePedro/SearXNG.git "/home/$USUARIO/SearXNG"
 
@@ -323,15 +321,15 @@ case "$resposta" in
         ;;
 
     N)
-        echo "Você escolheu 'Não'. Pulando a Instalação do SearXNG."
+        echo "Voce escolheu 'Nao'. Pulando a Instalacao do SearXNG."
         ;;
 esac
 
 # -------------------------------------------------------------------
-# 15. VSCODIUM-Configuração
+# 15. VSCODIUM-Configuracao
 # -------------------------------------------------------------------
 
-# Pré-Configurando o Git
+# Pre-Configurando o Git
 git config --global user.name "ArcoverdePedro"
 git config --global user.email "pedroarcoverde2@gmail.com"
 
@@ -372,7 +370,7 @@ echo "Atualizando e Reiniciando o PC"
 sudo apt update
 sudo apt upgrade -y
 
-echo "✅ Pós-instalação concluída!"
+echo "Pos-instalacao concluida!"
 echo ""
 echo "Reiniciando a Maquina"
 
