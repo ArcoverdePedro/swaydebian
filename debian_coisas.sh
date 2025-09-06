@@ -129,6 +129,10 @@ sudo cp -r "${SCRIPT_DIR}/wofi" "$HOME/.config/"
 
 # Adição do Grupo do Docker
 sudo usermod -aG docker "$USUARIO"
+
+# Define o firefox como browser padrão
+xdg-settings set default-web-browser firefox.desktop
+
 # -------------------------------------------------------------------
 # Script atualizar
 # -------------------------------------------------------------------
