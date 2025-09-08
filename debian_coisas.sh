@@ -368,15 +368,15 @@ echo "Atualizando e Reiniciando o PC"
 sudo apt update
 sudo apt upgrade -y
 
+systemctl --user enable dbus
+systemctl --user enable pipewire pipewire-pulse wireplumber
+systemctl --user enable xdg-desktop-portal-wlr xdg-desktop-portal
+
 echo "Pos-instalacao concluida!"
 echo ""
 echo "Reiniciando a Maquina"
 
 sleep 3
 
-systemctl --user enable dbus
-systemctl --user enable pipewire pipewire-pulse wireplumber
-systemctl --user enable xdg-desktop-portal xdg-desktop-portal-wlr
 
-sleep 2
 sudo shutdown -r now
