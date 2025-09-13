@@ -42,27 +42,23 @@ flatpak install -y --noninteractive flathub io.github.ungoogled_software.ungoogl
 
 
 # -------------------------------------------------------------------
-# Google Chrome
+# Repos
 # -------------------------------------------------------------------
+
+# Google Chrome
 
 echo "Instalando Google Chrome..."
 wget -q -O - https://dl.google.com/linux/linux_signing_key.pub | sudo gpg --dearmor -o /usr/share/keyrings/google-chrome.gpg
 echo "deb [arch=amd64 signed-by=/usr/share/keyrings/google-chrome.gpg] http://dl.google.com/linux/chrome/deb/ stable main" | sudo tee /etc/apt/sources.list.d/google-chrome.list
 
-# -------------------------------------------------------------------
-# Wezterm Repo
-# -------------------------------------------------------------------
-
+# Wezterm
 curl -fsSL https://apt.fury.io/wez/gpg.key | sudo gpg --yes --dearmor -o /usr/share/keyrings/wezterm-fury.gpg
 echo 'deb [signed-by=/usr/share/keyrings/wezterm-fury.gpg] https://apt.fury.io/wez/ * *' | sudo tee /etc/apt/sources.list.d/wezterm.list
 sudo chmod 644 /usr/share/keyrings/wezterm-fury.gpg
 
 cp -r "${SCRIPT_DIR}/wezterm/wezterm.lua" "$HOME/.wezterm.lua"
 
-# -------------------------------------------------------------------
-# VSCodium Repo
-# -------------------------------------------------------------------
-
+# VSCodium
 echo "Adicionando repositorio do VSCodium..."
 curl -sSL https://gitlab.com/paulcarroty/vscodium-deb-rpm-repo/raw/master/pub.gpg \
   | gpg --dearmor \
@@ -72,10 +68,8 @@ echo "deb [signed-by=/usr/share/keyrings/vscodium-archive-keyring.gpg] \
 https://download.vscodium.com/debs vscodium main" \
   | sudo tee /etc/apt/sources.list.d/vscodium.list >/dev/null
 
-# -------------------------------------------------------------------
-# Docker Repo
-# -------------------------------------------------------------------
 
+# Docker
 echo "Adicionando repositorio do Docker..."
 sudo install -m 0755 -d /etc/apt/keyrings
 sudo curl -fsSL https://download.docker.com/linux/debian/gpg -o /etc/apt/keyrings/docker.asc
@@ -85,10 +79,8 @@ echo "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.
 https://download.docker.com/linux/debian $(. /etc/os-release && echo "$VERSION_CODENAME") stable" \
   | sudo tee /etc/apt/sources.list.d/docker.list >/dev/null
 
-# -------------------------------------------------------------------
-# Atualizacao do repositorio
-# -------------------------------------------------------------------
 
+# Atualizacao dos repositorios
 sudo apt update
 
 # -------------------------------------------------------------------
@@ -165,7 +157,7 @@ xdg-settings set default-web-browser firefox.desktop
 xdg-mime default pcmanfm.desktop inode/directory
 
 # -------------------------------------------------------------------
-# Script atualizar
+# Script 'atualizar'
 # -------------------------------------------------------------------
 
 echo "Instalando comando 'atualizar'..."
@@ -403,13 +395,15 @@ echo "Atualizando e Reiniciando o PC"
 sudo apt update
 sudo apt upgrade -y
 
+systemctl --user enable dbus
+systemctl --user enable pipewire pipewire-pulse wireplumber
+systemctl --user enable xdg-desktop-portal-wlr xdg-desktop-portal
+
 echo "Pos-instalacao concluida!"
 echo ""
 echo "Reiniciando a Maquina"
 
-systemctl --user enable dbus
-systemctl --user enable pipewire pipewire-pulse wireplumber
-systemctl --user enable xdg-desktop-portal xdg-desktop-portal-wlr
+sleep 3
 
-sleep 2
+
 sudo shutdown -r now
