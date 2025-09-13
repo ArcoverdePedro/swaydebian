@@ -100,7 +100,7 @@ sudo apt install -y \
     sway swaybg swayidle swaylock waybar wofi wezterm \
     xwayland xdg-desktop-portal-wlr \
     pipewire pipewire-audio pulseaudio-utils wireplumber pipewire-pulse pavucontrol \
-    network-manager brightnessctl slurp grim \
+    network-manager jq brightnessctl slurp grim \
     pcmanfm fonts-font-awesome mupdf lightdm \
     libnotify-bin fonts-jetbrains-mono nsxiv \
     vlc libreoffice fastfetch btop tree unzip zip 7zip \
@@ -123,7 +123,32 @@ mkdir -p "$HOME/.config/sway"
 mkdir -p "$HOME/.config/waybar"
 mkdir -p "$HOME/.config/wofi"
 mkdir -p "$HOME/.config/gtk-3.0"
+mkdir -p "$HOME/Pictures"
+mkdir -p "$HOME/Documents"
+mkdir -p "$HOME/Downloads"
+mkdir -p "$HOME/Desktop"
 
+# Diretório de Downloads
+if [ -z "$XDG_DOWNLOAD_DIR" ]; then
+    export XDG_DOWNLOAD_DIR="$HOME/Downloads"
+fi
+
+# Diretório de Documentos
+if [ -z "$XDG_DOCUMENTS_DIR" ]; then
+    export XDG_DOCUMENTS_DIR="$HOME/Documents"
+fi
+
+# Diretório da Área de Trabalho (Desktop)
+if [ -z "$XDG_DESKTOP_DIR" ]; then
+    export XDG_DESKTOP_DIR="$HOME/Desktop"
+fi
+
+# Diretório de Imagens (Pictures)
+if [ -z "$XDG_PICTURES_DIR" ]; then
+    export XDG_PICTURES_DIR="$HOME/Pictures"
+fi
+
+sudo cp -r "${SCRIPT_DIR}/emacs/.emacs" "$HOME/.emacs"
 sudo cp -r "${SCRIPT_DIR}/sway" "$HOME/.config/"
 sudo cp -r "${SCRIPT_DIR}/waybar" "$HOME/.config/"
 sudo cp -r "${SCRIPT_DIR}/wofi" "$HOME/.config/"
@@ -345,7 +370,9 @@ extensions=(
   GitHub.vscode-pull-request-github
   yy0931.vscode-sqlite3-editor
   ms-kubernetes-tools.vscode-kubernetes-tools
- 
+  ShortArrow.line-number-deco
+  vscodevim.vim
+
 )
 
 for ext in "${extensions[@]}"; do

@@ -14,6 +14,9 @@ Ele também adiciona repositórios de terceiros e configura o ambiente do usuár
 Estrutura Pensada
   
     ├── debian_coisas.sh -> Script Principal
+    │
+    ├─ emacs
+    │   └── .emacs -> Arquivo de configuração do emacs 
     ├── gtk-3.0
     │   └── settings.ini -> estilização do pcmanfm
     ├── LICENSE
