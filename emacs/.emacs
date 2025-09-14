@@ -1,4 +1,4 @@
-uração pessoal do Emacs
+;;; .emacs --- Configuração pessoal do Emacs
 
 ;; ------------------------------------------------------------------
 ;; Configurações Básicas
@@ -25,7 +25,7 @@ uração pessoal do Emacs
             (setq display-line-numbers-type 'relative)
             (setq display-line-numbers-current-absolute t)))
 
-;; OPÇÃO 1: Usando overlays para adicionar coluna de números globais
+;; OPÇÃO 1: Números globais à esquerda, relativos à direita
 (defvar-local my/global-line-overlays nil
   "Lista de overlays para números globais.")
 
@@ -45,7 +45,7 @@ uração pessoal do Emacs
         (let ((overlay (make-overlay (line-beginning-position) 
                                      (line-beginning-position))))
           (overlay-put overlay 'before-string 
-                       (propertize (format "%4d│" line-num)
+                       (propertize (format "│%5d " line-num)
                                    'face 'line-number
                                    'display '((margin left-margin))))
           (push overlay my/global-line-overlays))
@@ -53,13 +53,15 @@ uração pessoal do Emacs
         (forward-line 1)))))
 
 (defun my/setup-dual-line-numbers ()
-  "Configura numeração dupla: global (esquerda) + híbrida (direita)."
+  "Configura numeração dupla: global (extrema esquerda) + híbrida (direita)."
+  ;; Primeiro desabilita a numeração padrão
+  (display-line-numbers-mode -1)
+  ;; Configura margem para números globais
+  (my/create-global-line-numbers)
+  ;; Reabilita com configuração híbrida
   (display-line-numbers-mode 1)
   (setq display-line-numbers-type 'relative)
-  (setq display-line-numbers-current-absolute t)
-  ;; Aumenta a margem esquerda para acomodar os números globais
-  (setq left-margin-width 6)
-  (my/create-global-line-numbers))
+  (setq display-line-numbers-current-absolute t))
 
 ;; Adiciona o hook apenas para modos de programação
 (add-hook 'prog-mode-hook #'my/setup-dual-line-numbers)
@@ -75,6 +77,7 @@ uração pessoal do Emacs
           (lambda ()
             (add-hook 'kill-buffer-hook #'my/clear-global-line-numbers nil t)))
 
+
 (tab-bar-mode 1)
 (scroll-bar-mode -1)
 (electric-pair-mode 1)
@@ -84,7 +87,6 @@ uração pessoal do Emacs
                                      :weight 'normal
                                      :slant 'normal
                                      :size 14))
-
 
 ;; Configuração de TAB
 (setq-default indent-tabs-mode t)
@@ -353,7 +355,7 @@ uração pessoal do Emacs
 (global-set-key (kbd "C-s") 'swiper-isearch)
 
 ;; Ação para fechar buffer e janela
-(global-set-key (kbd "<escape> x")
+(global-set-key (kbd "C-x C-q")
                 (lambda ()
                   (interactive)
                   (kill-this-buffer)
@@ -406,3 +408,4 @@ uração pessoal do Emacs
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  )
+
