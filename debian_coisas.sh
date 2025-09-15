@@ -387,8 +387,6 @@ extensions=(
   GitHub.vscode-pull-request-github
   yy0931.vscode-sqlite3-editor
   ms-kubernetes-tools.vscode-kubernetes-tools
-  ShortArrow.line-number-deco
-  vscodevim.vim
 
 )
 
