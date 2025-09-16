@@ -114,7 +114,7 @@ sudo apt install -y \
     xdg-utils pipx gnome-boxes \
     dbus dbus-user-session \
     fonts-dejavu fonts-noto fonts-noto-color-emoji \
-    git curl wget qbittorrent github-desktop
+    git curl wget qbittorrent github-desktop bluez blueman
 
 # -------------------------------------------------------------------
 # LSPs (Language Server Protocol)
@@ -421,6 +421,7 @@ sudo apt upgrade -y
 systemctl --user enable dbus
 systemctl --user enable pipewire pipewire-pulse wireplumber
 systemctl --user enable xdg-desktop-portal-wlr xdg-desktop-portal
+systemctl enable bluetooth.service
 
 echo "Pos-instalacao concluida!"
 echo ""

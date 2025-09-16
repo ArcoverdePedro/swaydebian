@@ -25,58 +25,6 @@
             (setq display-line-numbers-type 'relative)
             (setq display-line-numbers-current-absolute t)))
 
-;; OPÇÃO 1: Números globais à esquerda, relativos à direita
-(defvar-local my/global-line-overlays nil
-  "Lista de overlays para números globais.")
-
-(defun my/clear-global-line-numbers ()
-  "Remove todos os overlays de números globais."
-  (dolist (overlay my/global-line-overlays)
-    (delete-overlay overlay))
-  (setq my/global-line-overlays nil))
-
-(defun my/create-global-line-numbers ()
-  "Cria overlays com números globais à esquerda da numeração relativa."
-  (my/clear-global-line-numbers)
-  (save-excursion
-    (goto-char (point-min))
-    (let ((line-num 1))
-      (while (not (eobp))
-        (let ((overlay (make-overlay (line-beginning-position) 
-                                     (line-beginning-position))))
-          (overlay-put overlay 'before-string 
-                       (propertize (format "│%5d " line-num)
-                                   'face 'line-number
-                                   'display '((margin left-margin))))
-          (push overlay my/global-line-overlays))
-        (setq line-num (1+ line-num))
-        (forward-line 1)))))
-
-(defun my/setup-dual-line-numbers ()
-  "Configura numeração dupla: global (extrema esquerda) + híbrida (direita)."
-  ;; Primeiro desabilita a numeração padrão
-  (display-line-numbers-mode -1)
-  ;; Configura margem para números globais
-  (my/create-global-line-numbers)
-  ;; Reabilita com configuração híbrida
-  (display-line-numbers-mode 1)
-  (setq display-line-numbers-type 'relative)
-  (setq display-line-numbers-current-absolute t))
-
-;; Adiciona o hook apenas para modos de programação
-(add-hook 'prog-mode-hook #'my/setup-dual-line-numbers)
-
-;; Atualiza quando o buffer muda
-(add-hook 'after-change-functions 
-          (lambda (&rest _) 
-            (when (and (derived-mode-p 'prog-mode) my/global-line-overlays)
-              (run-with-idle-timer 0.1 nil #'my/create-global-line-numbers))))
-
-;; Limpa overlays ao sair do modo
-(add-hook 'prog-mode-hook
-          (lambda ()
-            (add-hook 'kill-buffer-hook #'my/clear-global-line-numbers nil t)))
-
 
 (tab-bar-mode 1)
 (scroll-bar-mode -1)
@@ -408,4 +356,3 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  )
-
