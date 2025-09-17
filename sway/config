@@ -31,10 +31,18 @@ bindsym XF86AudioLowerVolume exec ~/.config/sway/volume.sh down
 # Mute
 bindsym XF86AudioMute exec ~/.config/sway/volume.sh mute
 
-# Monitores nas posições corretas e com os workspaces iniciais corretos
-output DP-1 pos 0 0
-output HDMI-A-1 pos 1920 0
-workspace 1 output DP-1
+# Luminosidade (para Laptops)
+
+# Aumentar a luminosidade
+bindsym XF86MonBrightnessUp exec brightnessctl set +5%
+
+# Diminuir a luminosidade
+bindsym XF86MonBrightnessDown exec brightnessctl set 5%-
+
+# Monitores nas posições corretas e com os workspaces iniciais corretos (desktop)
+#output DP-1 pos 0 0
+#output HDMI-A-1 pos 1920 0
+#workspace 1 output DP-1
 
 # Janelas
 client.focused #b8bb26 #282828 #d79921 #b8bb26

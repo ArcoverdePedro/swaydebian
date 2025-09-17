@@ -6,6 +6,10 @@ SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )"
 
 echo "Iniciando pos-instalacao do Debian..."
 
+read -rp "Nome para o seu GIT:" NOME_GIT
+
+read -rp "Email para o seu GIT:" EMAIL_GIT
+
 read -rp "Deseja usar o SearXNG? (S/N): " resposta
 resposta=$(echo "$resposta" | tr '[:lower:]' '[:upper:]')
 
@@ -104,7 +108,7 @@ sudo apt install -y \
     xwayland xdg-desktop-portal-wlr \
     pipewire pipewire-audio pulseaudio-utils wireplumber pipewire-pulse pavucontrol \
     network-manager jq brightnessctl slurp grim \
-    pcmanfm fonts-font-awesome mupdf lightdm \
+    pcmanfm fonts-font-awesome mupdf lightdm brightnessctl \
     libnotify-bin fonts-jetbrains-mono nsxiv \
     vlc libreoffice fastfetch btop tree unzip zip 7zip \
     podman podman-compose docker-ce docker-ce-cli containerd.io \
@@ -361,8 +365,8 @@ esac
 # -------------------------------------------------------------------
 
 # Pre-Configurando o Git
-git config --global user.name "ArcoverdePedro"
-git config --global user.email "pedroarcoverde2@gmail.com"
+git config --global user.name "$NOME_GIT"
+git config --global user.email "$EMAIL_GIT"
 
 echo "configurando keybindings"
 sudo cp "${SCRIPT_DIR}/User/keybindings.json" "$HOME/.config/VSCodium/User/keybindings.json"

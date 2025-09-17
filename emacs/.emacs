@@ -18,13 +18,31 @@
 ;; Aparência
 (setq-default cursor-type 'bar)
 
-;; Configuração híbrida (relativa + absoluta na linha atual)
-(add-hook 'prog-mode-hook 
-          (lambda ()
-            (display-line-numbers-mode 1)
-            (setq display-line-numbers-type 'relative)
-            (setq display-line-numbers-current-absolute t)))
 
+;; Enable line numbers globally
+(global-display-line-numbers-mode 1)
+
+(defun toggle-absolute-relative-line-numbers ()
+  "Toggle between absolute and relative line numbers"
+  (interactive)
+  (if (eq display-line-numbers-type 'relative)
+      (progn
+        (setq-default display-line-numbers-type t)
+        (setq display-line-numbers-type t)
+        (message "Absolute line numbers"))
+    (progn
+      (setq-default display-line-numbers-type 'relative)
+      (setq display-line-numbers-type 'relative)
+      (message "Relative line numbers")))
+  ;; Refresh all buffers with line numbers
+  (dolist (buffer (buffer-list))
+    (with-current-buffer buffer
+      (when display-line-numbers-mode
+        (display-line-numbers-mode 0)
+        (display-line-numbers-mode 1)))))
+
+;; Bind to C-c C-l
+(global-set-key (kbd "C-c C-l") 'toggle-absolute-relative-line-numbers)
 
 (tab-bar-mode 1)
 (scroll-bar-mode -1)

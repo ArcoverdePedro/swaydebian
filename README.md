@@ -16,66 +16,60 @@ Estrutura Pensada
   
     ├── debian_coisas.sh -> Script Principal
     │
+	├─ fastfetch
+	│   └──config.jsonc -> configuração do fastfetch 
     ├─ emacs
     │   └── .emacs -> Arquivo de configuração do emacs 
     ├── gtk-3.0
-    │   └── settings.ini -> estilização do pcmanfm
+    │   └── settings.ini -> estilização do pcmanfm
     ├── LICENSE
     ├── README.md
     ├── sway
-    │   ├── config
-    │   └── volume.sh -> Script para controlar o volume
+    │   ├── config
+    │   └── volume.sh -> Script para controlar o volume
     ├── User
-    │   ├── keybindings.json -> keybindings para o VSCodium
-    │   └── settings.json -> Configurações do VSCodium
+    │   ├── keybindings.json -> keybindings para o VSCodium
+    │   └── settings.json -> Configurações do VSCodium
     ├── wallpaper
-    │   └── wallpaper.png
+    │   └── wallpaper.png
     ├── waybar
-    │   ├── config
-    │   └── style.css
+    │   ├── config
+    │   └── style.css
     ├── wezterm
-    │   └── wezterm.lua -> apenas para estilizar o terminal (Gruvbox Style)
+    │   └── wezterm.lua -> apenas para estilizar o terminal (Gruvbox Style)
     └── wofi
         ├── config
         └── style.css
 
 Funcionalidades Principais
 
-    Instalação de Pacotes Essenciais: curl, wget, git, ferramentas de sistema
+Instalação de Pacotes Essenciais: 
+	
+	curl, wget, git, ferramentas de sistema
 
-    Ambiente Wayland/Sway: Instalação completa do compositor Sway WM com waybar, wofi e Wezterm
+Ambiente Wayland/Sway:
+	
+	Instalação completa do compositor Sway WM com waybar, wofi e Wezterm
 
-    Multimídia: PipeWire, OBS Studio, controle de áudio
+Multimídia: 
+	
+	PipeWire, OBS Studio, controle de áudio, VLC, nsxiv, blueman
 
-    VSCodium com extensões para Python, Docker, YAML, TOML
+Ferramentas para Codar:
+	
+	VSCodium, Emacs (Evil-mode), Ferramentas, pipx, ruff, flake8, pyright, uv, Docker CE, Docker Compose, Podman e Podman Compose e Gnome-boxes (VM)
 
-    Ferramentas Python (pipx, ruff, flake8, pyright, uv)
+Aplicativos Flatpak: 
 
-    Docker CE, Docker Compose, Podman e Podman Compose
+	Ungoogled Chromium, Bruno (API client)
 
-    Aplicativos Flatpak: Ungoogled Chromium, Bruno (API client)
+Utilitários: 
 
-    Utilitários: pcmanfm, mupdf, btop, tree, nsxiv
-
-Configurações Automáticas
-
-    Configurações do Sway, Waybar e Wofi
-
-    Portal de desktop para Wayland
-
-    Usuário adicionado ao grupo Docker
-
-    Configuração inicial do Git
-
-    Comando Personalizado - atualizar: Atualiza sistema, pacotes Flatpak e realiza limpeza
+	pcmanfm, mupdf, btop, tree
 
 Como Usar:
 
     chmod +x debian_coisas.sh
     ./debian_coisas.sh
     
-Requisitos
-
-    Debian
-    Sudo User
-    Internet
+Requisitos: Debian, Sudo User, Internet
