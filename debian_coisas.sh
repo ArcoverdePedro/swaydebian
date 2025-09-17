@@ -115,10 +115,10 @@ sudo apt install -y \
     docker-buildx-plugin docker-compose-plugin \
     obs-studio obs-plugins v4l2loopback-dkms \
     google-chrome-stable codium firefox-esr ncdu \
-    xdg-utils pipx gnome-boxes \
-    dbus dbus-user-session \
+    xdg-utils pipx gnome-boxes bluez blueman pulseaudio-module-bluetooth \
+    dbus dbus-user-session libmpv1 bluez-tools \
     fonts-dejavu fonts-noto fonts-noto-color-emoji \
-    git curl wget qbittorrent github-desktop bluez blueman
+    git curl wget qbittorrent github-desktop
 
 # -------------------------------------------------------------------
 # LSPs (Language Server Protocol)
