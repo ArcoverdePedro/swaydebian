@@ -35,7 +35,7 @@ esac
 
 sudo apt update
 sudo apt install -y \
-    curl wget git ca-certificates gpg apt-transport-https flatpak coreutils
+    curl wget git gnupg2 lsb-release ca-certificates gpg apt-transport-https flatpak coreutils
 
 # -------------------------------------------------------------------
 # Flatpak
@@ -87,12 +87,8 @@ echo "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.
 https://download.docker.com/linux/debian $(. /etc/os-release && echo "$VERSION_CODENAME") stable" \
   | sudo tee /etc/apt/sources.list.d/docker.list >/dev/null
 
-# Bun (JS)
-curl -fsSL https://bun.sh/install | bash
-
-# Configurar PATH do Bun
-export BUN_INSTALL="$HOME/.bun"
-export PATH="$BUN_INSTALL/bin:$PATH"
+# NodeJS
+curl -fsSL https://deb.nodesource.com/setup_current.x | sudo -E bash -
 
 # Atualizacao dos repositorios
 sudo apt update
@@ -117,7 +113,7 @@ sudo apt install -y \
     xdg-utils pipx gnome-boxes bluez blueman pulseaudio-module-bluetooth \
     dbus dbus-user-session libmpv1 bluez-tools \
     fonts-dejavu fonts-noto fonts-noto-color-emoji \
-    git curl wget qbittorrent github-desktop
+    git curl wget qbittorrent github-desktop nodejs
 
 # -------------------------------------------------------------------
 # LSPs (Language Server Protocol)
@@ -125,13 +121,13 @@ sudo apt install -y \
 echo "Instalando servidores LSP"
 
 # Instalar LSPs com Bun
-bun install -g bash-language-server      # Bash/Shell
-bun install -g typescript                # TypeScript
-bun install -g typescript-language-server # TypeScript LSP
-bun install -g vscode-langservers-extracted # HTML/CSS/JSON
-bun install -g dockerfile-language-server-nodejs # Dockerfile
-bun install -g yaml-language-server      # YAML
-bun install -g intelephense              # PHP
+sudo npm install -g bash-language-server        # Bash/Shell
+sudo npm install -g typescript                 # TypeScript
+sudo npm install -g typescript-language-server # TypeScript LSP
+sudo npm install -g vscode-langservers-extracted # HTML/CSS/JSON
+sudo npm install -g dockerfile-language-server-nodejs # Dockerfile
+sudo npm install -g yaml-language-server       # YAML
+sudo npm install -g intelephense               # PHP
 
 # -------------------------------------------------------------------
 # Configuracao do Sway e Habilitando servicos do usuario
