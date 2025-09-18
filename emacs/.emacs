@@ -131,6 +131,20 @@
 
 (marginalia-mode 1)
 
+(use-package doom-modeline
+  :ensure t
+  :init (doom-modeline-mode 1)
+  :custom
+  (doom-modeline-height 25)
+  (doom-modeline-bar-width 3)
+  (doom-modeline-buffer-file-name-style 'truncate-except-project)
+  (doom-modeline-icon t)
+  (doom-modeline-major-mode-icon t)
+  (doom-modeline-minor-modes nil)
+  (doom-modeline-enable-word-count t)
+  (doom-modeline-vcs-max-length 20))
+
+
 ;; ------------------------------------------------------------------
 ;; IDE Features
 ;; ------------------------------------------------------------------
@@ -362,14 +376,7 @@
 	 "9b9d7a851a8e26f294e778e02c8df25c8a3b15170e6f9fd6965ac5f2544ef2a9"
 	 "7de64ff2bb2f94d7679a7e9019e23c3bf1a6a04ba54341c36e7cf2d2e56e2bcc"
 	 default))
- '(package-selected-packages
-   '(ace-window all-the-icons cargo company-ansible company-go
-				company-lua company-shell company-terraform dashboard
-				docker docker-compose-mode dockerfile-mode eat
-				emmet-mode evil groovy-mode gruvbox-theme
-				linum-relative lsp-pyright lsp-ui marginalia neotree
-				page-break-lines pyvenv quelpa-use-package rustic
-				swiper try web-mode)))
+ '(package-selected-packages nil))
 
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
