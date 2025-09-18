@@ -55,7 +55,7 @@ Multimídia:
 
 Ferramentas para Codar:
 	
-	VSCodium, Emacs (Evil-mode), Ferramentas, pipx, ruff, flake8, pyright, uv, Docker CE, Docker Compose, Podman e Podman Compose e Gnome-boxes (VM)
+	VSCodium, Emacs (Evil-mode), pipx, ruff, flake8, pyright, uv, Docker, Podman e Gnome-boxes (VM)
 
 Aplicativos Flatpak: 
 
