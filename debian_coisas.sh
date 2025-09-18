@@ -64,8 +64,6 @@ curl -fsSL https://apt.fury.io/wez/gpg.key | sudo gpg --yes --dearmor -o /usr/sh
 echo 'deb [signed-by=/usr/share/keyrings/wezterm-fury.gpg] https://apt.fury.io/wez/ * *' | sudo tee /etc/apt/sources.list.d/wezterm.list
 sudo chmod 644 /usr/share/keyrings/wezterm-fury.gpg
 
-cp -r "${SCRIPT_DIR}/wezterm/wezterm.lua" "$HOME/.wezterm.lua"
-
 # VSCodium
 echo "Adicionando repositorio do VSCodium..."
 curl -sSL https://gitlab.com/paulcarroty/vscodium-deb-rpm-repo/raw/master/pub.gpg \
@@ -90,6 +88,23 @@ https://download.docker.com/linux/debian $(. /etc/os-release && echo "$VERSION_C
 # NodeJS
 curl -fsSL https://deb.nodesource.com/setup_current.x | sudo -E bash -
 
+
+# -------------------------------------------------------------------
+# Nerd Fonts
+# -------------------------------------------------------------------
+
+echo "Baixando e instalando Nerd Fonts..."
+
+mkdir -p "$HOME/.local/share/fonts"
+
+# Baixa e instala a fonte JetBrainsMono Nerd Font
+wget -q https://github.com/ryanoasis/nerd-fonts/releases/latest/download/JetBrainsMono.zip -O /tmp/JetBrainsMono.zip
+unzip -o /tmp/JetBrainsMono.zip -d "$HOME/.local/share/fonts/" >/dev/null 2>&1
+rm -f /tmp/JetBrainsMono.zip
+fc-cache -fv >/dev/null 2>&1
+
+echo "Nerd Fonts instalado (JetBrainsMono)"
+
 # Atualizacao dos repositorios
 sudo apt update
 
@@ -105,13 +120,13 @@ sudo apt install -y \
     network-manager jq brightnessctl slurp grim \
     pcmanfm fonts-font-awesome mupdf lightdm brightnessctl \
     libnotify-bin fonts-jetbrains-mono nsxiv \
-    vlc libreoffice fastfetch btop tree unzip zip 7zip \
+    vlc libreoffice fastfetch btop tree unzip zip p7zip-full \
     podman podman-compose docker-ce docker-ce-cli containerd.io \
     docker-buildx-plugin docker-compose-plugin \
     obs-studio obs-plugins v4l2loopback-dkms \
     google-chrome-stable codium firefox-esr ncdu \
-    xdg-utils pipx gnome-boxes bluez blueman pulseaudio-module-bluetooth \
-    dbus dbus-user-session libmpv1 bluez-tools \
+    xdg-utils pipx gnome-boxes bluez blueman \
+    dbus dbus-user-session mpv bluez-tools \
     fonts-dejavu fonts-noto fonts-noto-color-emoji \
     git curl wget qbittorrent github-desktop nodejs
 
@@ -139,10 +154,12 @@ mkdir -p "$HOME/.config/sway"
 mkdir -p "$HOME/.config/waybar"
 mkdir -p "$HOME/.config/wofi"
 mkdir -p "$HOME/.config/gtk-3.0"
+mkdir -p "$HOME/.config/fastfetch"
 mkdir -p "$HOME/Pictures"
 mkdir -p "$HOME/Documents"
 mkdir -p "$HOME/Downloads"
 mkdir -p "$HOME/Desktop"
+
 
 # Diretório de Downloads
 if [ -z "$XDG_DOWNLOAD_DIR" ]; then
@@ -164,12 +181,16 @@ if [ -z "$XDG_PICTURES_DIR" ]; then
     export XDG_PICTURES_DIR="$HOME/Pictures"
 fi
 
+sudo cp -r "{SCRIPT_DIR}/fastfetch/config.jsonc"  "$HOME/.config/"
 sudo cp -r "${SCRIPT_DIR}/emacs/.emacs" "$HOME/.emacs"
 sudo cp -r "${SCRIPT_DIR}/sway" "$HOME/.config/"
 sudo cp -r "${SCRIPT_DIR}/waybar" "$HOME/.config/"
 sudo cp -r "${SCRIPT_DIR}/wofi" "$HOME/.config/"
 sudo cp -r "${SCRIPT_DIR}/gtk-3.0" "$HOME/.config/"
 sudo cp "${SCRIPT_DIR}/wallpaper/wallpaper.png" "$HOME/wallpaper.png"
+
+
+echo "fastfetch" >> $HOME/.bashrc 
 
 # Adição do Grupo do Docker
 sudo usermod -aG docker "$USUARIO"
