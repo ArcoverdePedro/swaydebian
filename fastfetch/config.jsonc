@@ -1,7 +1,9 @@
 {
     "$schema": "https://github.com/fastfetch-cli/fastfetch/raw/dev/doc/json_schema.json",
+    "logo": {
+        "type": "none"
+    },
     "modules": [
-        "break",
         {
             "type": "custom",
             "format": "\u001b[90m┌──────────────────────Specs─────────────────────────┐"
@@ -13,22 +15,22 @@
         },
         {
             "type": "cpu",
-            "key": "│ ├",
+            "key": " CPU",
             "keyColor": "red"
         },
         {
             "type": "gpu",
-            "key": "│ ├󰍛",
+            "key": "󰍛 GPU",
             "keyColor": "red"
         },
         {
             "type": "memory",
-            "key": "│ ├󰍛",
+            "key": "󰍛 MEM",
             "keyColor": "red"
         },
         {
             "type": "disk",
-            "key": "└ └",
+            "key": " DISK",
             "keyColor": "red"
         },
         "break",
@@ -39,30 +41,29 @@
         },
         {
             "type": "kernel",
-            "key": "│ ├",
+            "key": " KERNEL",
             "keyColor": "blue"
         },
         {
             "type": "packages",
-            "key": "│ ├󰏖",
+            "key": "󰏖 PAKS",
             "keyColor": "blue"
         },
         {
             "type": "shell",
-            "key": "│ ├",
+            "key": " SHELL",
             "keyColor": "blue"
         },
         {
             "type": "localip",
-            "key": "│ ├󰈀",
+            "key": "󰈀 IP",
             "keyColor": "blue"
         },
         {
             "type": "publicip",
-            "key": "└ └󰖟",
+            "key": " 󰖟 PUB IP",
             "keyColor": "blue"
         },
- 
         "break",
         {
             "type": "de",
@@ -71,17 +72,17 @@
         },
         {
             "type": "lm",
-            "key": "│ ├",
+            "key": " LM",
             "keyColor": "green"
         },
         {
             "type": "wm",
-            "key": "│ ├",
+            "key": " WM",
             "keyColor": "green"
         },
         {
             "type": "terminal",
-            "key": "└ └",
+            "key": " TERM",
             "keyColor": "green"
         },
         {
