@@ -44,7 +44,6 @@ sudo apt install -y \
 flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
 flatpak install -y --noninteractive flathub io.github.ungoogled_software.ungoogled_chromium com.usebruno.Bruno || true
 
-
 # -------------------------------------------------------------------
 # Repos
 # -------------------------------------------------------------------

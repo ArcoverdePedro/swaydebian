@@ -35,8 +35,6 @@ Estrutura Pensada
     ├── waybar
     │   ├── config
     │   └── style.css
-    ├── wezterm
-    │   └── wezterm.lua -> apenas para estilizar o terminal (Gruvbox Style)
     └── wofi
         ├── config
         └── style.css
