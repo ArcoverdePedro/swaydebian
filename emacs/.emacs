@@ -18,6 +18,7 @@
 ;; Aparência
 (setq-default cursor-type 'bar)
 
+(setq scroll-margin 5)
 
 ;; Enable line numbers globally
 (global-display-line-numbers-mode 1)
@@ -42,7 +43,7 @@
         (display-line-numbers-mode 1)))))
 
 ;; Bind to C-c C-l
-(global-set-key (kbd "C-c C-l") 'toggle-absolute-relative-line-numbers)
+(global-set-key (kbd "C-c C-p") 'toggle-absolute-relative-line-numbers)
 
 (tab-bar-mode 1)
 (scroll-bar-mode -1)
@@ -93,6 +94,8 @@
   (evil-global-set-key 'normal "gt" 'tab-new)
   ;; Fechar tab
   (evil-global-set-key 'normal "gw" 'tab-close)
+  ;; Refazer com C-r
+  (evil-define-key 'normal undo-tree-mode-map "C-r" 'undo-tree-redo)
   ;; Alternar entre janelas
   (evil-define-key 'normal evil-normal-state-map (kbd "C-<tab>") 'other-window))
 
