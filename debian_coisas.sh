@@ -59,11 +59,6 @@ echo "deb [arch=amd64 signed-by=/usr/share/keyrings/google-chrome.gpg] http://dl
 wget -qO - https://mirror.mwt.me/shiftkey-desktop/gpgkey | gpg --dearmor | sudo tee /usr/share/keyrings/mwt-desktop.gpg > /dev/null
 sudo sh -c 'echo "deb [arch=amd64 signed-by=/usr/share/keyrings/mwt-desktop.gpg] https://mirror.mwt.me/shiftkey-desktop/deb/ any main" > /etc/apt/sources.list.d/mwt-desktop.list'
 
-# Wezterm
-curl -fsSL https://apt.fury.io/wez/gpg.key | sudo gpg --yes --dearmor -o /usr/share/keyrings/wezterm-fury.gpg
-echo 'deb [signed-by=/usr/share/keyrings/wezterm-fury.gpg] https://apt.fury.io/wez/ * *' | sudo tee /etc/apt/sources.list.d/wezterm.list
-sudo chmod 644 /usr/share/keyrings/wezterm-fury.gpg
-
 # VSCodium
 echo "Adicionando repositorio do VSCodium..."
 curl -sSL https://gitlab.com/paulcarroty/vscodium-deb-rpm-repo/raw/master/pub.gpg \
@@ -76,14 +71,7 @@ https://download.vscodium.com/debs vscodium main" \
 
 
 # Docker
-echo "Adicionando repositorio do Docker..."
-sudo install -m 0755 -d /etc/apt/keyrings
-sudo curl -fsSL https://download.docker.com/linux/debian/gpg -o /etc/apt/keyrings/docker.asc
-sudo chmod a+r /etc/apt/keyrings/docker.asc
-
-echo "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.asc] \
-https://download.docker.com/linux/debian $(. /etc/os-release && echo "$VERSION_CODENAME") stable" \
-  | sudo tee /etc/apt/sources.list.d/docker.list >/dev/null
+curl -fsSL https://get.docker.com/ | sh
 
 # NodeJS
 curl -fsSL https://deb.nodesource.com/setup_current.x | sudo -E bash -
@@ -114,15 +102,14 @@ sudo apt update
 
 echo "Instalando pacotes principais..."
 sudo apt install -y \
-    sway swaybg swayidle swaylock waybar wofi wezterm \
-    xwayland xdg-desktop-portal-wlr \
+    sway swaybg swayidle swaylock waybar wofi alacritty \
+    xwayland xdg-desktop-portal-wlr wlr-randr kanshi wdisplays \
     pipewire pipewire-audio pulseaudio-utils wireplumber pipewire-pulse pavucontrol \
     network-manager jq brightnessctl slurp grim \
     pcmanfm fonts-font-awesome mupdf lightdm brightnessctl \
-    libnotify-bin fonts-jetbrains-mono nsxiv \
+    libnotify-bin fonts-jetbrains-mono imv \
     vlc libreoffice fastfetch btop tree unzip zip p7zip-full \
-    podman podman-compose docker-ce docker-ce-cli containerd.io \
-    docker-buildx-plugin docker-compose-plugin \
+    podman podman-compose \
     obs-studio obs-plugins v4l2loopback-dkms \
     google-chrome-stable codium firefox-esr ncdu \
     xdg-utils pipx gnome-boxes bluez blueman \
@@ -149,16 +136,23 @@ sudo npm install -g intelephense               # PHP
 # -------------------------------------------------------------------
 echo "Configurando o Sway"
 
-mkdir -p "$HOME/.config/VSCodium/User"
-mkdir -p "$HOME/.config/sway"
-mkdir -p "$HOME/.config/waybar"
-mkdir -p "$HOME/.config/wofi"
-mkdir -p "$HOME/.config/gtk-3.0"
-mkdir -p "$HOME/.config/fastfetch"
-mkdir -p "$HOME/Pictures"
-mkdir -p "$HOME/Documents"
-mkdir -p "$HOME/Downloads"
-mkdir -p "$HOME/Desktop"
+pastas=(
+"$HOME/.config/VSCodium/User"
+"$HOME/.config/sway"
+"$HOME/.config/waybar"
+"$HOME/.config/wofi"
+"$HOME/.config/gtk-3.0"
+"$HOME/.config/fastfetch"
+"$HOME/Pictures"
+"$HOME/Documents"
+"$HOME/Downloads"
+"$HOME/Desktop"
+
+)
+
+for pasta in "${pastas[@]}"; do
+    mkdir -p "$pasta"
+done
 
 
 # Diretório de Downloads
@@ -190,7 +184,7 @@ sudo cp -r "${SCRIPT_DIR}/gtk-3.0" "$HOME/.config/"
 sudo cp "${SCRIPT_DIR}/wallpaper/wallpaper.png" "$HOME/wallpaper.png"
 
 
-echo "fastfetch" >> $HOME/.bashrc 
+echo "fastfetch" >> "$HOME/.bashrc"
 
 # Adição do Grupo do Docker
 sudo usermod -aG docker "$USUARIO"

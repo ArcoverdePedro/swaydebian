@@ -3,7 +3,7 @@
 ![Sway Badge](https://img.shields.io/badge/Sway-68751C?logo=sway&logoColor=fff&style=for-the-badge)
 ![VSCodium Badge](https://img.shields.io/badge/VSCodium-2F80ED?logo=vscodium&logoColor=fff&style=for-the-badge)
 ![GNU Emacs Badge](https://img.shields.io/badge/GNU%20Emacs-7F5AB6?logo=gnuemacs&logoColor=fff&style=for-the-badge)
-![WezTerm Badge](https://img.shields.io/badge/WezTerm-4E49EE?logo=wezterm&logoColor=fff&style=for-the-badge)
+![Alacritty Badge](https://img.shields.io/badge/Alacritty-F46D01?logo=alacritty&logoColor=fff&style=for-the-badge)
 
 Pós-Instalação Debian
 
@@ -47,15 +47,15 @@ Instalação de Pacotes Essenciais:
 
 Ambiente Wayland/Sway:
 	
-	Instalação completa do compositor Sway WM com waybar, wofi e Wezterm
+	Instalação completa do compositor Sway WM com waybar, wofi e Alacritty
 
 Multimídia: 
 	
-	PipeWire, OBS Studio, controle de áudio, VLC, nsxiv, blueman
+	PipeWire, OBS Studio, controle de áudio, VLC, imv, blueman
 
 Ferramentas para Codar:
 	
-	VSCodium, Emacs (Evil-mode), pipx, ruff, flake8, NodeJS, LSPs de varias Linguagens, UV, Docker, Podman e Gnome-boxes (VM)
+	VSCodium, Emacs (Evil-mode), pipx, ruff, flake8, NodeJS, LSPs, UV, Docker, Podman e Gnome-boxes (VM)
 
 Aplicativos Flatpak: 
 

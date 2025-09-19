@@ -57,7 +57,7 @@ floating_modifier $mod
 exec_always swaybg -i ~/wallpaper.png -m fill
 
 # Terminal
-bindsym $mod+Return exec wezterm
+bindsym $mod+Return exec alacritty
 
 # Fechar janela
 bindsym $mod+Shift+q kill

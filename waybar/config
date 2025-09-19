@@ -63,7 +63,17 @@
     "tooltip-format-disconnected": "Disconnected 󰖪",
     "max-length": 50
   },
-
+"bluetooth": {
+  "format": "{icon}",
+  "format-disabled": "{icon}",
+  "format-connected": "{icon} {status} {num_connections}",
+  "format-icons": {
+    "enabled": "",
+    "disabled": "󰂲"
+  },
+  "tooltip-format": "{status}",
+  "on-click": "blueman-manager"
+}
   "battery": {
     "format": "{icon}",
     "format-icons": ["", "", "", "", ""],
