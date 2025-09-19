@@ -47,7 +47,7 @@ Instalação de Pacotes Essenciais:
 
 Ambiente Wayland/Sway:
 	
-	Instalação completa do compositor Sway WM com waybar, wofi e Alacritty
+	Instalação completa do compositor SwayWM com Waybar, Wofi e Alacritty
 
 Multimídia: 
 	
@@ -55,7 +55,7 @@ Multimídia:
 
 Ferramentas para Codar:
 	
-	VSCodium, Emacs (Evil-mode), pipx, ruff, flake8, NodeJS, LSPs, UV, Docker, Podman e Gnome-boxes (VM)
+	VSCodium, Emacs (Evil-mode), pipx, ruff, flake8, NodeJS, LSPs, UV, Github Desktop, Docker, Podman e Gnome-boxes (VM)
 
 Aplicativos Flatpak: 
 
