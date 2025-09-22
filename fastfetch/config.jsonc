@@ -1,8 +1,5 @@
 {
     "$schema": "https://github.com/fastfetch-cli/fastfetch/raw/dev/doc/json_schema.json",
-    "logo": {
-        "type": "none"
-    },
     "modules": [
         {
             "type": "custom",
@@ -33,7 +30,6 @@
             "key": " DISK",
             "keyColor": "red"
         },
-        "break",
         {
             "type": "os",
             "key": " OS",
@@ -41,7 +37,7 @@
         },
         {
             "type": "kernel",
-            "key": " KERNEL",
+            "key": " KERNEL",
             "keyColor": "blue"
         },
         {
@@ -59,12 +55,6 @@
             "key": "󰈀 IP",
             "keyColor": "blue"
         },
-        {
-            "type": "publicip",
-            "key": " 󰖟 PUB IP",
-            "keyColor": "blue"
-        },
-        "break",
         {
             "type": "de",
             "key": " DE",
