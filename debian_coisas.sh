@@ -183,6 +183,7 @@ sudo cp -r "${SCRIPT_DIR}/wofi" "$HOME/.config/"
 sudo cp -r "${SCRIPT_DIR}/gtk-3.0" "$HOME/.config/"
 sudo cp "${SCRIPT_DIR}/wallpaper/wallpaper.png" "$HOME/wallpaper.png"
 
+echo "export TERM=xterm-256color" >> "$HOME/.bashrc"
 
 echo "fastfetch" >> "$HOME/.bashrc"
 
