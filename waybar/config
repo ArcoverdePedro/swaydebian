@@ -1,86 +1,41 @@
 {
   "layer": "top",
   "position": "top",
-  "modules-left": ["sway/workspaces", "custom/poweroff", "custom/reboot", "custom/logout"],
+  "height": 30,
+  "modules-left": ["sway/workspaces", "sway/mode"],
   "modules-center": ["clock"],
-  "modules-right": ["pulseaudio", "network", "battery", "tray"],
-
+  "modules-right": ["network", "pulseaudio", "battery", "tray"],
   "sway/workspaces": {
-    "format": "{icon}",
-    "on-click": "activate",
-    "format-icons": {
-      "1": "1",
-      "2": "2",
-      "3": "3",
-      "4": "4",
-      "5": "5",
-      "urgent": "",
-      "active": "",
-      "default": ""
-    }
+    "disable-scroll": true,
+    "all-outputs": true,
+    "format": "{name}"
   },
-
-  "custom/poweroff": {
-    "format": "⏻",
-    "tooltip": "Desligar",
-    "on-click": "systemctl poweroff"
-  },
-
-  "custom/reboot": {
-    "format": "",
-    "tooltip": "Reiniciar",
-    "on-click": "systemctl reboot"
-  },
-
-  "custom/logout": {
-    "format": "",
-    "tooltip": "Logout",
-    "on-click": "swaymsg exit"
-  },
-
   "clock": {
-    "format": " {:%H:%M}"
+    "format": "{:%a %d/%m %H:%M}",
+    "tooltip-format": "{:%A, %d/%m/%Y}"
   },
-
+  "network": {
+    "format-wifi": "Wi-Fi {signalStrength}%",
+    "format-ethernet": "LAN",
+    "format-linked": "Rede",
+    "format-disconnected": "Offline",
+    "tooltip-format": "{ifname}: {ipaddr}",
+    "on-click": "nm-connection-editor"
+  },
   "pulseaudio": {
-    "format": "{volume}% {icon}",
-    "format-icons": {
-      "muted": "",
-      "default": ["", "", ""]
-    },
-    "max-volume": 150,
+    "format": "♪ {volume}%",
+    "format-muted": "Mudo",
     "on-click": "pavucontrol"
   },
-
-  "network": {
-    "format": "{ifname}",
-    "format-wifi": "{ipaddr} - {essid} ({signalStrength}%) ",
-    "format-ethernet": "{ipaddr}/{cidr} 󰈀",
-    "format-disconnected": "",
-    "tooltip-format": "{ifname} via {gwaddr} ",
-    "tooltip-format-wifi": "{essid} ({signalStrength}%) ",
-    "tooltip-format-ethernet": "{ifname} 󰈀",
-    "tooltip-format-disconnected": "Disconnected 󰖪",
-    "max-length": 50
-  },
-"bluetooth": {
-  "format": "{icon}",
-  "format-disabled": "{icon}",
-  "format-connected": "{icon} {status} {num_connections}",
-  "format-icons": {
-    "enabled": "",
-    "disabled": "󰂲"
-  },
-  "tooltip-format": "{status}",
-  "on-click": "blueman-manager"
-}
   "battery": {
-    "format": "{icon}",
-    "format-icons": ["", "", "", "", ""],
-    "tooltip-format": "{capacity}% - {time}"
+    "format": "Bat {capacity}%",
+    "format-charging": "Carga {capacity}%",
+    "format-full": "Bat 100%",
+    "states": {"warning": 25, "critical": 10},
+    "tooltip-format": "{capacity}%"
   },
-
   "tray": {
+    "spacing": 8,
     "icon-size": 16
   }
 }

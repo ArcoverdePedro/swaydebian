@@ -1,5 +1,4 @@
-width=600
-height=400
-mode=run
-colors=colors
-filter_rate=100
+width=520
+height=360
+prompt=Aplicativos
+allow_markup=false
