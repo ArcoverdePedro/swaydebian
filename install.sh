@@ -84,8 +84,17 @@ install -m 0644 -- "$ROOT/wallpaper/wallpaper.png" "$CONFIG_HOME/sway/wallpaper.
 mkdir -p "$HOME/Pictures" "$HOME/Downloads" "$HOME/Documents"
 
 if command -v sway >/dev/null 2>&1; then
-    echo "Validando configuracao do Sway..."
-    sway -C -c "$CONFIG_HOME/sway/config"
+    echo "Validando configuracao do Sway (sem depender de GPU/TTY)..."
+    runtime_dir="$(mktemp -d)"
+    chmod 700 "$runtime_dir"
+    if ! XDG_RUNTIME_DIR="$runtime_dir" WLR_BACKENDS=headless \
+        WLR_RENDERER=pixman WLR_LIBINPUT_NO_DEVICES=1 \
+        sway -C -c "$CONFIG_HOME/sway/config"; then
+        rmdir "$runtime_dir" 2>/dev/null || true
+        echo "Falha de validacao. Restaure o backup se necessario: $backup_dir" >&2
+        exit 1
+    fi
+    rmdir "$runtime_dir" 2>/dev/null || true
 fi
 
 echo
