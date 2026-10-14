@@ -1,0 +1,27 @@
+name: Validar configuracoes
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  checks:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Validar shell e JSON
+        run: |
+          bash -n install.sh debian_coisas.sh scripts/install-dev.sh
+          python3 -m json.tool waybar/config >/dev/null
+          python3 -m json.tool User/settings.json >/dev/null
+          python3 -m json.tool User/keybindings.json >/dev/null
+      - name: Validar Sway
+        run: |
+          sudo apt-get update -qq
+          sudo apt-get install -y -qq sway
+          cp sway/local.conf.example sway/local.conf
+          mkdir -p "$RUNNER_TEMP/sway-runtime"
+          chmod 700 "$RUNNER_TEMP/sway-runtime"
+          XDG_RUNTIME_DIR="$RUNNER_TEMP/sway-runtime" \
+          WLR_BACKENDS=headless WLR_RENDERER=pixman \
+          WLR_LIBINPUT_NO_DEVICES=1 sway -C -c "$PWD/sway/config"

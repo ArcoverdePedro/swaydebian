@@ -1,0 +1,18 @@
+# Ajustes por computador. Este arquivo e copiado para local.conf
+# na primeira instalacao e preservado nas instalacoes seguintes.
+
+# Teclado brasileiro ABNT2:
+# input type:keyboard {
+#     xkb_layout br
+#     xkb_variant abnt2
+# }
+
+# Descubra os nomes das saidas: swaymsg -t get_outputs
+# Exemplo de escala para notebook HiDPI:
+# output eDP-1 scale 1.25
+
+# Exemplo de monitor externo:
+# output HDMI-A-1 resolution 1920x1080 position 1920 0
+
+# Exemplo de Bluetooth (instale blueman, caso necessario):
+# exec blueman-applet
