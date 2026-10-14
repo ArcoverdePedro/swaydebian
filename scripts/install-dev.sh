@@ -16,9 +16,12 @@ fi
 [[ "${ID:-}" == debian ]] || { echo "Suportado apenas no Debian." >&2; exit 1; }
 
 sudo apt-get update
-sudo apt-get install -y --no-install-recommends \
-    git curl wget build-essential python3 python3-pip pipx \
-    nodejs npm btop tree jq fastfetch
+packages=(git curl wget build-essential python3 python3-pip pipx nodejs npm btop tree jq)
+# fastfetch existe no Debian 13, mas nao no Debian 12 oficial.
+if apt-cache show fastfetch >/dev/null 2>&1; then
+    packages+=(fastfetch)
+fi
+sudo apt-get install -y --no-install-recommends "${packages[@]}"
 
 # Configuracoes do VSCodium apenas quando ele ja estiver instalado.
 if command -v codium >/dev/null 2>&1; then
